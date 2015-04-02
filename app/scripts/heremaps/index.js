@@ -7,6 +7,8 @@ var
   webApp = angular.module('hereWebcodingChallenge', [
     require('../logger').name,
     require('../templates').name,
+    require('../map').name,
+    require('../user').name,
     'ct.ui.router.extras',
     'ngMessages',
     'ngMaterial',
@@ -28,6 +30,7 @@ var
     .directive('navigation', require('./directives/navigationDirective'))
     .directive('menuButton', require('./directives/menuButtonDirective'))
     .directive('httpLoader', require('./directives/httpLoaderDirective'))
+    .directive('hereMap', require('./directives/hereMap'))
     .service('UtilService', require('./services/utilService'))
     .run(['LoggerService', function (LoggerService) {
       LoggerService.consolelog('the app started, ver.: ' + appConfig.version);
@@ -40,6 +43,9 @@ var
           $window.scrollTo(0, 0);
         });
       }
-    ]);
+    ])
+    .run(['UserService', function (UserService) {
+      UserService.getLocation();
+    }]);
 
 module.exports = webApp;

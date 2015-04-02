@@ -40,6 +40,7 @@
 
   <!-- build:css styles/vendor.css -->
   <!-- bower:css -->
+  <link src="https://js.api.here.com/v3/3.0/mapsjs-ui.css" />
   <link rel="stylesheet" href="../bower_components/angular-material/angular-material.css" />
   <link rel="stylesheet" href="../bower_components/mdi/materialdesignicons.css" />
   <!-- endbower -->
@@ -55,22 +56,20 @@
   your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<div layout="column" class="http-loader" http-loader>
-  <md-progress-linear md-mode="indeterminate" class="md-accent"></md-progress-linear>
-</div>
-
-<section layout="row" flex>
-  <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" navigation></md-sidenav>
-  <md-content flex>
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <menu-button></menu-button>
-        <span>HERE Web Coding Challenge</span>
-      </div>
-    </md-toolbar>
-    <div layout="column" layout-fill layout-align="center center" ui-view=""></div>
-  </md-content>
+<section layout="row" flex layout-align="space-around center">
+  <!--<md-progress-circular md-mode="indeterminate"></md-progress-circular>-->
+  <here-map></here-map>
 </section>
+
+
+<!-- build:js scripts/here-maps.js -->
+<script src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
+<script src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
+<script src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+<script src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
+<script src="https://js.api.here.com/v3/3.0/mapsjs-places.js"></script>
+<!-- endbuild -->
+
 <!-- build:js scripts/vendor.js -->
 <script src="../bower_components/angular/angular.js"></script>
 <script src="../bower_components/lodash/lodash.min.js"></script>
