@@ -1,0 +1,28 @@
+.match-card-score {
+  white-space: nowrap;
+  display: inline-block;
+}
+.match-card-country {
+  white-space: nowrap;
+}
+.match {
+  margin: 20px;
+  padding: 10px;
+}
+.match-scores h2 {
+  display: inline-block;
+}
+.match-scores {
+  white-space: nowrap;
+}
+.match-location, .match-time {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+}
+.text-align--right md-item-content {
+  flex-direction: row-reverse;
+}
+
+

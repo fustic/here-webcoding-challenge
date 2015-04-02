@@ -1,0 +1,24 @@
+.group-card-table {
+  border-spacing: 0;
+  width: 100%;
+}
+.group-card-table thead {
+  background-color: #E1F5FE;
+}
+.group-card-table td, .group-card-table th {
+  text-align: center;
+  padding: 5px;
+}
+.group {
+  margin: 20px;
+  padding: 10px;
+}
+.match-score {
+  background-color: #E1F5FE;
+  padding: 1px 5px 0 5px;
+  border-radius: 3px;
+}
+.group-match {
+  display: block;
+  margin-bottom: 10px;
+}

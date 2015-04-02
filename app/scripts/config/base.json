@@ -1,0 +1,10 @@
+{
+  "debug": false,
+  "environment": "production",
+  "api": {
+    "keys": {
+      "appId": "3ytkEPHP6GWXareSXVtS",
+      "appCode": "J6n9v0e5AseqFLM33QMlWQ"
+    }
+  }
+}

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="fragment" content="!">
+  <base href="/"/>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="">
+  <meta http-equiv="content-language" content="en">
+  <title>Test Smaato world cup challenge</title>
+
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="images/icons/apple-touch-icon-57x57.png"/>
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/icons/apple-touch-icon-114x114.png"/>
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/icons/apple-touch-icon-72x72.png"/>
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/icons/apple-touch-icon-144x144.png"/>
+  <link rel="apple-touch-icon-precomposed" sizes="60x60" href="images/icons/apple-touch-icon-60x60.png"/>
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="images/icons/apple-touch-icon-120x120.png"/>
+  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="images/icons/apple-touch-icon-76x76.png"/>
+  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="images/icons/apple-touch-icon-152x152.png"/>
+
+  <!-- Favicons -->
+
+  <link rel="icon" type="image/png" href="images/icons/favicon-196x196.png" sizes="196x196"/>
+  <link rel="icon" type="image/png" href="images/icons/favicon-96x96.png" sizes="96x96"/>
+  <link rel="icon" type="image/png" href="images/icons/favicon-32x32.png" sizes="32x32"/>
+  <link rel="icon" type="image/png" href="images/icons/favicon-16x16.png" sizes="16x16"/>
+  <link rel="icon" type="image/png" href="images/icons/favicon-128.png" sizes="128x128"/>
+
+  <meta name="msapplication-TileColor" content="#FFFFFF"/>
+  <meta name="msapplication-TileImage" content="images/icons/mstile-144x144.png"/>
+  <meta name="msapplication-square70x70logo" content="images/icons/mstile-70x70.png"/>
+  <meta name="msapplication-square150x150logo" content="images/icons/mstile-150x150.png"/>
+  <meta name="msapplication-wide310x150logo" content="images/icons/mstile-310x150.png"/>
+  <meta name="msapplication-square310x310logo" content="images/icons/mstile-310x310.png"/>
+
+
+  <!-- build:css styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="../bower_components/angular-material/angular-material.css" />
+  <link rel="stylesheet" href="../bower_components/mdi/materialdesignicons.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:css styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/groups.css">
+  <link rel="stylesheet" href="styles/matches.css"/>
+  <link rel="stylesheet" href="styles/teams.css"/>
+  <!-- endbuild -->
+</head>
+<body layout="row">
+<!--[if lt IE 10]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+  your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<div layout="column" class="http-loader" http-loader>
+  <md-progress-linear md-mode="indeterminate" class="md-accent"></md-progress-linear>
+</div>
+
+<section layout="row" flex>
+  <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" navigation></md-sidenav>
+  <md-content flex>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <menu-button></menu-button>
+        <span>Smaato World Cup Challenge</span>
+      </div>
+    </md-toolbar>
+    <div layout="column" layout-fill layout-align="center center" ui-view=""></div>
+  </md-content>
+</section>
+<!-- build:js scripts/vendor.js -->
+<script src="../bower_components/angular/angular.js"></script>
+<script src="../bower_components/lodash/lodash.min.js"></script>
+<!-- endbuild -->
+
+<!-- build:js scripts/vendor-plugins.js -->
+<script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="../bower_components/ui-router-extras/release/ct-ui-router-extras.min.js"></script>
+<script src="../bower_components/angular-animate/angular-animate.js"></script>
+<script src="../bower_components/angular-aria/angular-aria.js"></script>
+<script src="../bower_components/angular-messages/angular-messages.js"></script>
+<script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="../bower_components/angular-material/angular-material.js"></script>
+<script src="../bower_components/angular-google-chart/ng-google-chart.js"></script>
+<!-- endbuild -->
+
+<!-- build:js scripts/bundle.min.js -->
+<script src="scripts/bundle.min.js"></script>
+<!-- endbuild -->
+
+</body>
+</html>

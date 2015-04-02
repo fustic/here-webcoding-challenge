@@ -1,0 +1,145 @@
+a {
+  color: #0277BD;
+  cursor: pointer;
+}
+a:hover, a:focus {
+  text-decoration: underline;
+}
+.no-margin {
+  margin: 0 !important;
+}
+.no-padding {
+  padding: 0 !important;
+}
+.pointer {
+  cursor: pointer;
+}
+.hidden {
+  display: none !important;
+}
+.text-align--left {
+  text-align: left !important;
+}
+.text-align--center {
+  text-align: center !important;
+}
+.text-align--right {
+  text-align: right !important;
+}
+.bold {
+  font-weight: bold !important;
+}
+.w100 {
+  width: 100% !important;
+}
+.w50 {
+  width: 50% !important;
+}
+.margin-left-0 {
+  margin-left: 0 !important;
+}
+.padding-left-10 {
+  padding-left: 10px;
+}
+.margin-left-10 {
+  margin-left: 10px;
+}
+.margin-left-15 {
+  margin-left: 15px;
+}
+.margin-right-5 {
+  margin-right: 5px;
+}
+.margin-top-10 {
+  margin-top: 10px;
+}
+.padding-top-0 {
+  padding-top: 0!important;
+}
+.padding-bottom-0 {
+  padding-bottom: 0!important;
+}
+.button-icon {
+  width: 24px;
+  height: 24px;
+  margin-top: 1px;
+}
+.md-button i {
+  font-size: 18px;
+}
+.filter-icon {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+}
+md-input-container {
+  padding-bottom: 12px;
+}
+md-input-container .md-char-counter {
+  line-height: 0;
+}
+
+.text-field {
+  padding-top: 5px;
+}
+.text-field__label {
+  top: -14px;
+}
+.lx-select {
+  margin-top: 10px;
+}
+.filter-actions {
+  margin-top: 25px;
+}
+.filter-actions button {
+  padding: 5px 25px;
+}
+.filter-actions .md-button i {
+  font-size: 21px;
+  margin-left: -5px;
+}
+.dialog-popup .md-actions {
+  border-top: 1px solid rgba(0,0,0,0.12);
+}
+.http-loader {
+  width: 100%;
+  height: 5px;
+  position: fixed;
+  z-index: 999;
+}
+.http-loader .md-container {
+  top: 0;
+}
+md-toast.md-error-theme {
+  background-color: #E91E63;
+  color: #fff;
+}
+md-toast.md-success-theme {
+  background-color: #4CAF50;
+  color: #fff;
+}
+md-toast {
+  z-index: 102;
+}
+.md-sidenav-left, md-backdrop.md-dialog-backdrop {
+  z-index: 100;
+}
+.md-dialog-container {
+  z-index: 101;
+}
+
+md-content {
+  height: 100%;
+}
+.color-red {
+  color: #F44336 !important;
+}
+.color-green {
+  color: #4CAF50 !important;
+}
+.color-yellow {
+  color: #FFEB3B !important;
+}
+.color-blue {
+  color: #2196F3 !important;
+}
