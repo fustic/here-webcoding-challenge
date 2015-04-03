@@ -26,6 +26,7 @@ module.exports = ['$http', '$window', 'PlatformService', 'Heremaps.Config', 'Use
               pixelRation: $window.devicePixelRatio || 1
             });
 
+        map.setBaseLayer(defaultLayers.satellite.map);
         // Enable the event system on the map instance:
         var mapEvents = new H.mapevents.MapEvents(map);
         // Instantiate the default behavior, providing the mapEvents object:

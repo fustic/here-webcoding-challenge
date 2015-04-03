@@ -22,5 +22,9 @@
   "location": {
     "lat": "52.53102",
     "lng": "13.38481"
+  },
+  "shortener": {
+    "url": "https://api-ssl.bitly.com/v3/shorten",
+    "accessToken": "4cdb95317e8805e2ea56703137d7336a86113bf8"
   }
 }

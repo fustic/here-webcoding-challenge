@@ -52,6 +52,14 @@ function userService($http, $q, Config, $location) {
       });
 
       return deferred.promise;
+    },
+    shortUrl: function (url) {
+      return $http.get(Config.shortener.url, {
+        params: {
+          access_token: Config.shortener.accessToken,
+          longUrl: encodeURIComponent(url)
+        }
+      });
     }
   };
 }
