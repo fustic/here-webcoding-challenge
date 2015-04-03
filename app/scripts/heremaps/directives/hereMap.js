@@ -2,10 +2,11 @@
 var
   H = require('H'),
   utils = require('../../common').utils;
-module.exports = ['$http', '$window', 'PlatformService', 'Heremaps.Config', 'UserService',
-  function ($http, $window, PlatformService, Config, UserService) {
+module.exports = ['$http', '$window', 'MapService', 'Heremaps.Config', 'UserService',
+  function ($http, $window, MapService, Config, UserService) {
     return {
       restrict: 'EA',
+      template: '<md-progress-circular md-mode="indeterminate"></md-progress-circular>',
       link: function (scope, element) {
 
         element.css({
@@ -13,32 +14,16 @@ module.exports = ['$http', '$window', 'PlatformService', 'Heremaps.Config', 'Use
           height: $window.innerHeight + 'px'
         });
 
-        var
-          platform = PlatformService.getPlatform(),
-          // Obtain the default map types from the platform object
-          defaultLayers = platform.createDefaultLayers(),
-          map = new H.Map(
-            element[0],
-            defaultLayers.normal.map,
-            {
-              zoom: 10,
-              center: Config.location,
-              pixelRation: $window.devicePixelRatio || 1
-            });
-
-        map.setBaseLayer(defaultLayers.satellite.map);
-        // Enable the event system on the map instance:
-        var mapEvents = new H.mapevents.MapEvents(map);
-        // Instantiate the default behavior, providing the mapEvents object:
-        var behavior = new H.mapevents.Behavior(mapEvents);
-        // Create the default UI:
-        var ui = H.ui.UI.createDefault(map, defaultLayers);
-
         UserService.getLocation().then(function success(location) {
-          map.setCenter({
-            lat: location.lat,
-            lng: location.lng
-          }, true);
+          element.html('');
+          var map = MapService.initMap(
+            element[0],
+            {
+              lat: location.lat,
+              lng: location.lng
+            },
+            $window.devicePixelRatio || 1
+          );
         });
       }
     };

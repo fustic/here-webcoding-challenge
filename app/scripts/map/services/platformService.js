@@ -9,7 +9,7 @@ function platformService($q, Config) {
   var
     platform,
     platformServiceObject = {
-      getPlatform: function getHere() {
+      getPlatform: function getPlatform() {
         if (!platform) {
           platform = new H.service.Platform({
             app_id: Config.api.keys.appId,
