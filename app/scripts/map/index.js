@@ -9,6 +9,7 @@
 var
   angular = require('angular'),
   map = angular
-    .module('heremapsMap', []);
+    .module('heremapsMap', [])
+    .service('PlatformService', require('./services/platformService'));
 
 module.exports = map;

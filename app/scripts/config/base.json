@@ -5,6 +5,18 @@
     "keys": {
       "appId": "3ytkEPHP6GWXareSXVtS",
       "appCode": "J6n9v0e5AseqFLM33QMlWQ"
+    },
+    "lib": {
+      "js": [
+        "js.api.here.com/v3/3.0/mapsjs-core.js",
+        "js.api.here.com/v3/3.0/mapsjs-service.js",
+        "js.api.here.com/v3/3.0/mapsjs-mapevents.js",
+        "js.api.here.com/v3/3.0/mapsjs-ui.js",
+        "js.api.here.com/v3/3.0/mapsjs-places.js"
+      ],
+      "css": [
+        "js.api.here.com/v3/3.0/mapsjs-ui.css"
+      ]
     }
   },
   "location": {

@@ -18,7 +18,8 @@
   },
   "browserify-shim": {
     "_": "global:_",
-    "angular": "global:angular"
+    "angular": "global:angular",
+    "H": "global:H"
   },
   "browserify": {
     "transform": [

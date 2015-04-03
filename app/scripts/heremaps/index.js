@@ -14,6 +14,7 @@ var
     'ngMaterial',
     'ngSanitize'
   ])
+    .constant('Heremaps.Enums', require('../config/enums'))
     .constant('Heremaps.Config', appConfig)
     .config(require('./router'))
     .config(['$mdThemingProvider', function($mdThemingProvider) {
