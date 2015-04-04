@@ -19,6 +19,9 @@
       ]
     }
   },
+  "map": {
+    "types": ["normal", "satellite", "terrain"]
+  },
   "location": {
     "lat": "52.53102",
     "lng": "13.38481"

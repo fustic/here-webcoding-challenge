@@ -32,6 +32,12 @@ var
     .service('UtilService', require('./services/utilService'))
     .run(['LoggerService', function (LoggerService) {
       LoggerService.consolelog('the app started, ver.: ' + appConfig.version);
-    }]);
+    }])
+    .run(['$rootScope', '$state', '$stateParams',
+      function ($rootScope, $state, $stateParams) {
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
+      }
+    ]);
 
 module.exports = webApp;

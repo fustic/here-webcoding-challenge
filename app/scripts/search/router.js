@@ -13,7 +13,7 @@ function searchRouter($stateProvider, $urlRouterProvider) {
 
   var
     placesState = {
-      url: '/places/?map',
+      url: '/places?map',
       templateUrl: '/scripts/search/views/search.html',
       controller: 'SearchController',
       controllerAs: 'search',
@@ -24,7 +24,7 @@ function searchRouter($stateProvider, $urlRouterProvider) {
       }
     };
   $stateProvider
-    .state('index', angular.extend({}, placesState, {url: '/'}));
+    .state('index', angular.extend({}, placesState, {url: '/?map'}));
   $stateProvider
     .state('places', placesState);
 

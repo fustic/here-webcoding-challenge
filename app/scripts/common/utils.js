@@ -44,5 +44,21 @@ module.exports = {
         element.className = element.className.replace(className, '');
       }
     }
+  },
+  parseMapParams: function parseMapParams(mapParam) {
+    if (!mapParam) {
+      return null;
+    }
+    var
+      mapParamsArray = mapParam.split(','),
+      map = {
+        location: {
+          lat: mapParamsArray[0],
+          lng: mapParamsArray[1]
+        },
+        zoom: mapParamsArray[2],
+        type: mapParamsArray[3]
+      };
+    return map;
   }
 };
