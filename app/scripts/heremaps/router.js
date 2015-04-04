@@ -14,11 +14,6 @@ function appRouter($stateProvider, $urlRouterProvider, $locationProvider) {
 
   $locationProvider.html5Mode(true).hashPrefix('!');
   $urlRouterProvider.rule(common.router.trailingSlash);
-  //$stateProvider
-  //  .state('default', {
-  //    url: '/',
-  //    template: '<groups layout-fill></groups>'
-  //  });
 }
 
 module.exports = appRouter;

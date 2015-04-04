@@ -127,7 +127,6 @@ md-toast {
 .md-dialog-container {
   z-index: 101;
 }
-
 md-content {
   height: 100%;
 }
@@ -143,4 +142,22 @@ md-content {
 .color-blue {
   color: #2196F3 !important;
 }
-
+.search {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px;
+}
+.search md-card {
+  background: #273142;
+}
+.search .md-header {
+  height: 40px;
+}
+.search md-tabs.md-default-theme md-tab.active {
+  color: #ffffff;
+  background: #0c1628;
+}
+.search md-tabs.md-default-theme md-tab{
+  color: rgba(255, 255, 255, 0.6)
+}

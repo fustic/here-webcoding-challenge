@@ -1,0 +1,23 @@
+<md-tabs md-selected="search.tabs.selectedIndex" md-border-bottom>
+  <md-tab label="Places">
+    <div class="md-padding">
+      <md-autocomplete
+        ng-disabled="false"
+        md-no-cache="ctrl.noCache"
+        md-selected-item="ctrl.selectedItem"
+        md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+        md-search-text="ctrl.searchText"
+        md-selected-item-change="ctrl.selectedItemChange(item)"
+        md-items="item in ctrl.querySearch(ctrl.searchText)"
+        md-item-text="item.display"
+        placeholder="Let's give this engine a crank…">
+        <span md-highlight-text="ctrl.searchText">{{item.display}}</span>
+      </md-autocomplete>
+    </div>
+  </md-tab>
+  <md-tab label="Routes">
+    <div>
+      Routes
+    </div>
+  </md-tab>
+</md-tabs>

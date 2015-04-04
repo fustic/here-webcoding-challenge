@@ -14,5 +14,9 @@ module.exports = {
   INIT_STATUSES: {
     LOADING: 'loading',
     LOADED: 'loaded'
+  },
+  SEARCH_STATE: {
+    PLACES: 'places',
+    ROUTES: 'routes'
   }
 };

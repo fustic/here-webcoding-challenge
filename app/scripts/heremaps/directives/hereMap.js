@@ -1,12 +1,10 @@
 'use strict';
-var
-  H = require('H'),
-  utils = require('../../common').utils;
-module.exports = ['$http', '$window', 'MapService', 'Heremaps.Config', 'UserService',
-  function ($http, $window, MapService, Config, UserService) {
+
+module.exports = ['$window', 'MapService', 'UserService',
+  function ($window, MapService, UserService) {
     return {
       restrict: 'EA',
-      template: '<md-progress-circular md-mode="indeterminate"></md-progress-circular>',
+      template: '<md-progress-circular md-mode="indeterminate" class="md-accent"></md-progress-circular>',
       link: function (scope, element) {
 
         element.css({
