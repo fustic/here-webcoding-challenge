@@ -1,16 +1,19 @@
 'use strict';
 
-searchRouter.$inject = ['$stateProvider'];
+var angular = require('angular');
+searchRouter.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 /**
  * @name search module router
  * @param {ui.router.state.$stateProvider} $stateProvider
+ * @param {ui.router.state.$urlRouterProvider} $urlRouterProvider
  */
-function searchRouter($stateProvider) {
+function searchRouter($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise('/');
 
-  $stateProvider
-    .state('places', {
-      url: '/{path:places}/?map',
+  var
+    placesState = {
+      url: '/places/?map',
       templateUrl: '/scripts/search/views/search.html',
       controller: 'SearchController',
       controllerAs: 'search',
@@ -19,7 +22,11 @@ function searchRouter($stateProvider) {
           return Enums.SEARCH_STATE.PLACES;
         }]
       }
-    });
+    };
+  $stateProvider
+    .state('index', angular.extend({}, placesState, {url: '/'}));
+  $stateProvider
+    .state('places', placesState);
 
   $stateProvider
     .state('routes', {
