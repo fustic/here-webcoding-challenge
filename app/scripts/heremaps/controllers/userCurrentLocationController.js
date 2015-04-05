@@ -1,10 +1,11 @@
 'use strict';
 userCurrentLocationController.$inject = [
   'MapService',
-  'UserService'
+  'UserService',
+  'MarkersService'
 ];
 
-function userCurrentLocationController(MapService, UserService) {
+function userCurrentLocationController(MapService, UserService, MarkersService) {
 
   this.disabled = true;
   this.location = null;
@@ -12,6 +13,7 @@ function userCurrentLocationController(MapService, UserService) {
     this.disabled = false;
     this.showTooltip = true;
     this.location = location;
+    MarkersService.addCurrentPositionMarker(location);
   }.bind(this));
   UserService.getReverseIPLocation().then(function success(location) {
     this.disabled = false;

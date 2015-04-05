@@ -12,6 +12,7 @@ var
     .module('heremapsMap', [])
     .service('PlatformService', require('./services/platformService'))
     .service('MapEventsService', require('./services/mapEventsService'))
+    .service('MarkersService', require('./services/markersService'))
     .service('MapService', require('./services/mapService'));
 
 module.exports = map;
