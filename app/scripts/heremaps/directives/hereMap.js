@@ -15,14 +15,6 @@ module.exports = ['$window', 'MapService', function ($window, MapService) {
         element[0],
         $window.devicePixelRatio || 1
       );
-      //
-      //var mapConfig =
-      //if (mapConfig) {
-      //  element.html('');
-      //
-      //} else {
-
-      //}
     }
   };
 }];

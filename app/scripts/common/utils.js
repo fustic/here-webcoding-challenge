@@ -60,5 +60,8 @@ module.exports = {
         type: mapParamsArray[3]
       };
     return map;
+  },
+  getMapString: function getMapString(coords, mapType, zoom) {
+    return coords.lat + ','+coords.lng + ',' + zoom + ',' + mapType;
   }
 };

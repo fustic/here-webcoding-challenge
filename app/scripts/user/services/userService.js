@@ -17,6 +17,22 @@ function userService($http, $q, Config, $location) {
     defaultLocation = Config.location;
 
   return {
+    getReverseIPLocation: function getReverseIPLocation() {
+      return $http.get($location.protocol() + '://freegeoip.net/json/', {
+        cache: true
+      }).then(function success(response) {
+        var
+          data = response.data || {},
+          l = {
+            country: data['country_code'] || defaultLocation.country,
+            lat: data.latitude || defaultLocation.lat,
+            lng: data.longitude || defaultLocation.lng
+          };
+        return l;
+      }, function error(e) {
+        Logger.critical('freegeoip-service is unavailable!', e);
+      });
+    },
     getLocation: function getLocation() {
       var
         deferred = $q.defer();
@@ -34,23 +50,6 @@ function userService($http, $q, Config, $location) {
           enableHighAccuracy: true
         });
       }
-
-      $http.get($location.protocol() + '://freegeoip.net/json/', {
-        cache: true
-      }).then(function success(response) {
-        var
-          data = response.data || {},
-          l = {
-            country: data['country_code'] || defaultLocation.country,
-            lat: data.latitude || defaultLocation.lat,
-            lng: data.longitude || defaultLocation.lng
-          };
-        deferred.resolve(l);
-      }, function error(e) {
-        deferred.resolve(defaultLocation);
-        Logger.critical('freegeoip-service is unavailable!', e);
-      });
-
       return deferred.promise;
     },
     shortUrl: function (url) {

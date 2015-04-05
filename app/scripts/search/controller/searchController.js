@@ -18,12 +18,6 @@ function searchController(Enums, searchState, $stateParams, MapService, UserServ
   var mapConfig = utils.parseMapParams($stateParams.map);
   if (mapConfig) {
     MapService.updateMap(mapConfig);
-  } else {
-    UserService.getLocation().then(function success(location) {
-      MapService.updateMap({
-        location: location
-      });
-    });
   }
 }
 module.exports = searchController;

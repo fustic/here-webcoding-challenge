@@ -17,6 +17,7 @@ function searchRouter($stateProvider, $urlRouterProvider) {
       templateUrl: '/scripts/search/views/search.html',
       controller: 'SearchController',
       controllerAs: 'search',
+      reloadOnSearch: false,
       resolve: {
         searchState: ['Heremaps.Enums', function (Enums) {
           return Enums.SEARCH_STATE.PLACES;
@@ -34,6 +35,7 @@ function searchRouter($stateProvider, $urlRouterProvider) {
       templateUrl: '/scripts/search/views/search.html',
       controller: 'SearchController',
       controllerAs: 'search',
+      reloadOnSearch: false,
       resolve: {
         searchState: ['Heremaps.Enums', function (Enums) {
           return Enums.SEARCH_STATE.ROUTES;

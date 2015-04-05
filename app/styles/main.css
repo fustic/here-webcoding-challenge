@@ -176,3 +176,10 @@ md-content {
 .search md-autocomplete input {
   padding-left: 25px;
 }
+.user-current-location .md-button.md-fab.md-fab-bottom-right{
+  right: 6px;
+  bottom: 40px;
+  height: 30px;
+  width: 30px;
+  padding-top: 3px;
+}

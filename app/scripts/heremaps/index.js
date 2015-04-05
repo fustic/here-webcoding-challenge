@@ -29,6 +29,8 @@ var
         .primaryPalette('green');
     }])
     .directive('hereMap', require('./directives/hereMap'))
+    .directive('userCurrentLocation', require('./directives/userCurrentLocationDirective'))
+    .controller('UserCurrentLocationController', require('./controllers/userCurrentLocationController'))
     .service('UtilService', require('./services/utilService'))
     .run(['LoggerService', function (LoggerService) {
       LoggerService.consolelog('the app started, ver.: ' + appConfig.version);

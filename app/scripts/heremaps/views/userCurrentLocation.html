@@ -1,0 +1,12 @@
+<md-button class="md-fab md-fab-bottom-right right"
+           aria-label="current location"
+           ng-click="userLocation.centerLocation()"
+           ng-disabled="userLocation.disabled">
+  <i class="mdi mdi-crosshairs-gps"></i>
+  <md-tooltip md-direction="left"
+              md-visible="userLocation.showTooltip"
+              md-autohide="true"
+              ng-click="userLocation.centerLocation()">
+    Center on your location
+  </md-tooltip>
+</md-button>

@@ -2,13 +2,14 @@
 
 var H = require('H');
 
-mapService.$inject = ['$q', 'Heremaps.Config', 'PlatformService'];
+mapService.$inject = ['$q', 'Heremaps.Config', 'PlatformService', 'MapEventsService'];
 
-function mapService($q, Config, PlatformService) {
+function mapService($q, Config, PlatformService, MapEventsService) {
 
   var
     map,
     defaultLayers,
+    currentMapType = '',
     mapServiceObject = {
       getMap: function getMap() {
         if (!map) {
@@ -32,12 +33,16 @@ function mapService($q, Config, PlatformService) {
           });
 
         map.setBaseLayer(defaultLayers.satellite.map);
-        // Enable the event system on the map instance:
-        var mapEvents = new H.mapevents.MapEvents(map);
-        // Instantiate the default behavior, providing the mapEvents object:
-        var behavior = new H.mapevents.Behavior(mapEvents);
-        // Create the default UI:
-        var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+        var
+          // Enable the event system on the map instance:
+          mapEvents = new H.mapevents.MapEvents(map),
+          // Instantiate the default behavior, providing the mapEvents object:
+          behavior = new H.mapevents.Behavior(mapEvents),
+          // Create the default UI:
+          ui = H.ui.UI.createDefault(map, defaultLayers);
+
+        MapEventsService.bindEvents(map);
       },
       updateMap: function updateMap(mapUpdate) {
         if (!mapUpdate) {

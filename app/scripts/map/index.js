@@ -11,6 +11,7 @@ var
   map = angular
     .module('heremapsMap', [])
     .service('PlatformService', require('./services/platformService'))
+    .service('MapEventsService', require('./services/mapEventsService'))
     .service('MapService', require('./services/mapService'));
 
 module.exports = map;
