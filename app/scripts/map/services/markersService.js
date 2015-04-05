@@ -50,7 +50,6 @@ function markersService(Config, Enums, $compile, $rootScope) {
           lat: location.Location.DisplayPosition.Latitude,
           lng: location.Location.DisplayPosition.Longitude
         });
-        //pointLabelBubble.setContent($pointLabel.html());
         if (pointLabelBubble.getState() !== Enums.BUBBLE_STATES.OPEN) {
           pointLabelBubble.open();
         }

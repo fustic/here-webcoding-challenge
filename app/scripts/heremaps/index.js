@@ -35,13 +35,21 @@ var
     .run(['LoggerService', function (LoggerService) {
       LoggerService.consolelog('the app started, ver.: ' + appConfig.version);
     }])
-    .run(['$rootScope', '$state', '$stateParams',
-      function ($rootScope, $state, $stateParams) {
+    .run(['$rootScope', '$state', '$stateParams', '$location',
+      function ($rootScope, $state, $stateParams, $location) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
         $rootScope.$on('$stateChangeStart',
           function (event, toState, toParams, fromState, fromParams) {
-            console.log(event, toState, toParams, fromState, fromParams);
+            //to keep search parameters
+            if (fromParams) {
+              Object.keys(fromParams).forEach(function (key) {
+                if (!toParams[key]) {
+                  toParams[key] = fromParams[key];
+                }
+              });
+            }
+            $location.search(toParams);
           }
         );
       }

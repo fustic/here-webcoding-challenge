@@ -28,6 +28,11 @@ function searchRouter($stateProvider, $urlRouterProvider) {
     .state('index', angular.extend({}, placesState, {url: '/?map'}));
   $stateProvider
     .state('places', placesState);
+  $stateProvider
+    .state('place', angular.extend({}, placesState, {
+      url: '/places/:placeID/?map',
+      reloadOnSearch: true
+    }));
 
   $stateProvider
     .state('routes', {
