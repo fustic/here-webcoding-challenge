@@ -39,6 +39,11 @@ var
       function ($rootScope, $state, $stateParams) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
+        $rootScope.$on('$stateChangeStart',
+          function (event, toState, toParams, fromState, fromParams) {
+            console.log(event, toState, toParams, fromState, fromParams);
+          }
+        );
       }
     ]);
 

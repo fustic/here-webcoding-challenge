@@ -2,9 +2,9 @@
 
 var H = require('H');
 
-mapService.$inject = ['$q', 'Heremaps.Config', 'PlatformService', 'MapEventsService'];
+mapService.$inject = ['$q', 'Heremaps.Config', 'PlatformService', 'MapEventsService', 'MarkersService'];
 
-function mapService($q, Config, PlatformService, MapEventsService) {
+function mapService($q, Config, PlatformService, MapEventsService, MarkersService) {
 
   var
     map,
@@ -40,9 +40,11 @@ function mapService($q, Config, PlatformService, MapEventsService) {
           // Instantiate the default behavior, providing the mapEvents object:
           behavior = new H.mapevents.Behavior(mapEvents),
           // Create the default UI:
-          ui = H.ui.UI.createDefault(map, defaultLayers);
+          ui = H.ui.UI.createDefault(map, defaultLayers, 'en-US');
 
         MapEventsService.bindEvents(map);
+        MarkersService.setMap(map);
+        MarkersService.setUI(ui);
       },
       updateMap: function updateMap(mapUpdate) {
         if (!mapUpdate) {

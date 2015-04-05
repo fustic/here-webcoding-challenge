@@ -18,5 +18,9 @@ module.exports = {
   SEARCH_STATE: {
     PLACES: 'places',
     ROUTES: 'routes'
+  },
+  BUBBLE_STATES: {
+    OPEN: 'open',
+    CLOSED: 'closed'
   }
 };

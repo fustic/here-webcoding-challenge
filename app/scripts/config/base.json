@@ -20,7 +20,10 @@
     }
   },
   "map": {
-    "types": ["normal", "satellite", "terrain"]
+    "types": ["normal", "satellite", "terrain"],
+    "colors": {
+      "currentPosition": "rgb(64,196,255)"
+    }
   },
   "location": {
     "lat": "52.53102",

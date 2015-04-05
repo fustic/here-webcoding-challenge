@@ -17,7 +17,6 @@ function userCurrentLocationController(MapService, UserService, MarkersService) 
   }.bind(this));
   UserService.getReverseIPLocation().then(function success(location) {
     this.disabled = false;
-    this.showTooltip = true;
     if (!this.location) {
       this.location = location;
     }

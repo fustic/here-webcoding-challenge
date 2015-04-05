@@ -8,6 +8,7 @@ function platformService($q, Config) {
 
   var
     platform,
+    geocoder,
     platformServiceObject = {
       getPlatform: function getPlatform() {
         if (!platform) {
@@ -17,6 +18,12 @@ function platformService($q, Config) {
           });
         }
         return platform;
+      },
+      getGeocoder: function getGeocoder() {
+        if (!geocoder) {
+          geocoder = platform.getGeocodingService();
+        }
+        return geocoder;
       }
     };
 
