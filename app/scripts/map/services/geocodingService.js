@@ -25,7 +25,10 @@ function geocodingService($q, Config, PlatformService, Logger, MarkersService) {
             maxresults: 1
           },
           function success(result) {
-            deferred.resolve(result.Response.View[0].Result[0]);
+            if (result.Response && result.Response.View[0]) {
+              return deferred.resolve(result.Response.View[0].Result[0]);
+            }
+            return deferred.reject();
           },
           function error(err) {
             deferred.reject();

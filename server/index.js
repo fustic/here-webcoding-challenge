@@ -28,6 +28,6 @@ var server = app.listen(process.env.PORT || 3000, function () {
     host = server.address().address,
     port = server.address().port;
 
-  console.log('Duriana web-app listening at http://%s:%s', host, port);
+  console.log('Here webchallenge listening at http://%s:%s', host, port);
 
 });
