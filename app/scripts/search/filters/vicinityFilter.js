@@ -7,7 +7,7 @@ function vicinityFilter() {
    * @return {string}
    */
   return function (vicinity) {
-    return vicinity && vicinity.replace('<br/>', ', ') || '';
+    return vicinity && vicinity.replace(/<br\/>/g, ', ') || '';
   };
 }
 

@@ -17,12 +17,10 @@ function searchPlacesController(SearchService, $location, MapService) {
         map = MapService.getMap(),
         layerProvider = map.getBaseLayer().getProvider(),
         mapType = layerProvider.copyrightKey_ === 'hybrid' ? 'satellite' : layerProvider.copyrightKey_,
-        searchMap = [].concat(item.position, mapType, map.getZoom());
-
+        searchMap = [].concat(item.position, map.getZoom(), mapType);
       $location.path('/places/' + item.id + '/').search({
         map: searchMap.join(',')
       });
-      console.info('Item changed to ' + item);
     }
   }
 }

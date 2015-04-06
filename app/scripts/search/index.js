@@ -14,8 +14,10 @@ var
     .filter('vicinity', require('./filters/vicinityFilter'))
     .controller('SearchController', require('./controller/searchController'))
     .controller('SearchPlacesController', require('./controller/searchPlacesController'))
+    .controller('PlaceInformationController', require('./controller/placeInformationController'))
     .directive('searchTabs', require('./directives/searchTabsDirective'))
     .directive('searchPlaces', require('./directives/searchPlacesDirective'))
+    .directive('placeInformation', require('./directives/placeInformationDirective'))
     .service('SearchService', require('./services/searchService'));
 
 module.exports = search;

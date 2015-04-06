@@ -1,0 +1,27 @@
+<md-toolbar class="place-information-toolbar">
+  <div class="md-toolbar-tools">
+    <img ng-src="{{placeInfo.place.icon}}" class="place-information-toolbar-image"/>
+    <h3 class="md-flex"
+        ng-bind-template="{{placeInfo.place.name}}"></h3>
+    <md-button class="md-fab md-accent place-information-get-directions" aria-label="Get directions">
+      <md-tooltip md-direction="left" md-autohide="true">Get directions</md-tooltip>
+      <i class="mdi mdi-directions icon--l"></i>
+    </md-button>
+  </div>
+</md-toolbar>
+<md-content class="md-padding">
+  <p class="no-margin">Information:</p>
+  <md-input-container flex ng-if="placeInfo.place.calculated.categories">
+    <label>Categories</label>
+    <input ng-model="placeInfo.place.calculated.categories" disabled>
+  </md-input-container>
+  <md-input-container flex ng-if="placeInfo.place.calculated.address">
+    <label>Address</label>
+    <input ng-model="placeInfo.place.calculated.address" disabled>
+  </md-input-container>
+  <md-input-container flex ng-if="placeInfo.place.contacts.phone" ng-repeat="phone in placeInfo.place.contacts.phone">
+    <label>{{phone.label}}</label>
+    <input ng-model="phone.value" disabled>
+  </md-input-container>
+
+</md-content>

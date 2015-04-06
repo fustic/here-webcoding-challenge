@@ -2,6 +2,7 @@
   <md-tab label="Places">
     <div class="md-padding">
       <search-places></search-places>
+      <place-information place-id="{{search.placeID}}" ng-if="search.placeID"></place-information>
     </div>
   </md-tab>
   <md-tab label="Routes">

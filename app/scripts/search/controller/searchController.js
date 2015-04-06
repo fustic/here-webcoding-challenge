@@ -4,16 +4,16 @@ searchController.$inject = [
   'Heremaps.Enums',
   'searchState',
   '$stateParams',
-  'MapService',
-  'UserService'
+  'MapService'
 ];
 
-function searchController(Enums, searchState, $stateParams, MapService, UserService) {
+function searchController(Enums, searchState, $stateParams, MapService) {
   var
     tabsList = [Enums.SEARCH_STATE.PLACES, Enums.SEARCH_STATE.ROUTES];
   this.tabs = {
     selectedIndex: tabsList.indexOf(searchState)
   };
+  this.placeID = $stateParams.placeID;
 
   var mapConfig = utils.parseMapParams($stateParams.map);
   if (mapConfig) {
