@@ -2,9 +2,9 @@
 
 var H = require('H');
 
-platformService.$inject = ['$q', 'Heremaps.Config'];
+platformService.$inject = ['$location', 'Heremaps.Config'];
 
-function platformService($q, Config) {
+function platformService($location, Config) {
 
   var
     platform,
@@ -14,7 +14,8 @@ function platformService($q, Config) {
         if (!platform) {
           platform = new H.service.Platform({
             app_id: Config.api.keys.appId,
-            app_code: Config.api.keys.appCode
+            app_code: Config.api.keys.appCode,
+            useHTTPS: $location.protocol() === 'https'
           });
         }
         return platform;
