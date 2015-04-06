@@ -11,7 +11,11 @@ var
   search = angular
     .module('heremapsSearch', ['ui.router'])
     .config(require('./router'))
+    .filter('vicinity', require('./filters/vicinityFilter'))
     .controller('SearchController', require('./controller/searchController'))
-    .directive('searchTabs', require('./directives/searchTabsDirective'));
+    .controller('SearchPlacesController', require('./controller/searchPlacesController'))
+    .directive('searchTabs', require('./directives/searchTabsDirective'))
+    .directive('searchPlaces', require('./directives/searchPlacesDirective'))
+    .service('SearchService', require('./services/searchService'));
 
 module.exports = search;

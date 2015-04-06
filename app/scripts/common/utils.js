@@ -62,6 +62,9 @@ module.exports = {
     return map;
   },
   getMapString: function getMapString(coords, mapType, zoom) {
-    return coords.lat + ','+coords.lng + ',' + zoom + ',' + mapType;
+    return coords.lat + ',' + coords.lng + ',' + zoom + ',' + mapType;
+  },
+  getLocationString: function getLocationString(coords) {
+    return coords.lat + ',' + coords.lng;
   }
 };
