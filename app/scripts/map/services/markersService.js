@@ -15,8 +15,11 @@ function markersService(Config, Enums, $compile, $rootScope) {
     map,
     ui,
     $pointLabelScope = $rootScope.$new(),
+    $placeScope = $rootScope.$new(),
     $pointLabel = $compile(angular.element('<location-label></location-label>'))($pointLabelScope),
-    pointLabelBubble;
+    $placeLabel = $compile(angular.element('<location-label></location-label>'))($placeScope),
+    pointLabelBubble,
+    placeLabelBubble;
 
   return {
     setMap: function setMap(mapInstance) {
@@ -52,6 +55,32 @@ function markersService(Config, Enums, $compile, $rootScope) {
         });
         if (pointLabelBubble.getState() !== Enums.BUBBLE_STATES.OPEN) {
           pointLabelBubble.open();
+        }
+      }
+    },
+    showPlaceBubble: function showPlaceBubble(place) {
+      if (pointLabelBubble) {
+        pointLabelBubble.close();
+      }
+      $placeScope.locationLabel.setPlace(place);
+      if (!placeLabelBubble) {
+        placeLabelBubble = new H.ui.InfoBubble({
+          lat: place.location.position[0],
+          lng: place.location.position[1]
+        }, {
+          content: ''
+        });
+        ui.addBubble(placeLabelBubble);
+        var bubbleBody = placeLabelBubble.el.querySelector('.H_ib_body');
+        bubbleBody.innerHTML = '';
+        bubbleBody.appendChild($placeLabel[0]);
+      } else {
+        placeLabelBubble.setPosition({
+          lat: place.location.position[0],
+          lng: place.location.position[1]
+        });
+        if (placeLabelBubble.getState() !== Enums.BUBBLE_STATES.OPEN) {
+          placeLabelBubble.open();
         }
       }
     }

@@ -13,13 +13,8 @@ function searchPlacesController(SearchService, $location, MapService) {
       return SearchService.search(query);
     },
     selectedItemChange: function selectedItemChange(item) {
-      var
-        map = MapService.getMap(),
-        layerProvider = map.getBaseLayer().getProvider(),
-        mapType = layerProvider.copyrightKey_ === 'hybrid' ? 'satellite' : layerProvider.copyrightKey_,
-        searchMap = [].concat(item.position, map.getZoom(), mapType);
       $location.path('/places/' + item.id + '/').search({
-        map: searchMap.join(',')
+        map: utils.getMapStringfromMap(item.position, MapService.getMap())
       });
     }
   }

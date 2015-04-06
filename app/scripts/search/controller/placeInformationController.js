@@ -1,10 +1,10 @@
 'use strict';
 var utils = require('../../common').utils;
 placeInformationController.$inject = [
-  'SearchService', '$scope', '$location', 'MapService', 'UtilService', '$filter'
+  'SearchService', '$scope', 'MarkersService', 'UtilService', '$filter'
 ];
 
-function placeInformationController(SearchService, $scope, $location, MapService, UtilService, $filter) {
+function placeInformationController(SearchService, $scope, MarkersService, UtilService, $filter) {
   var
     placeID = $scope.placeId,
     addressFilter = $filter('vicinity');
@@ -12,7 +12,9 @@ function placeInformationController(SearchService, $scope, $location, MapService
 
   SearchService.place(placeID).then(function success(place) {
     this.place = place;
-    console.log(place);
+
+    MarkersService.showPlaceBubble(place);
+
     this.place.calculated = {};
     if (this.place.categories && this.place.categories.length) {
       this.place.calculated.categories = [];
@@ -24,7 +26,6 @@ function placeInformationController(SearchService, $scope, $location, MapService
     if (this.place.location.address) {
       this.place.calculated.address = addressFilter(this.place.location.address.text);
     }
-
   }.bind(this), function error(err) {
     UtilService.showErrorMessage(err.data.message);
   });

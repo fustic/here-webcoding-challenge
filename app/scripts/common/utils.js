@@ -66,5 +66,12 @@ module.exports = {
   },
   getLocationString: function getLocationString(coords) {
     return coords.lat + ',' + coords.lng;
+  },
+  getMapStringfromMap: function getMapStringfromMap(latLngArray, map) {
+    var
+      layerProvider = map.getBaseLayer().getProvider(),
+      mapType = layerProvider.copyrightKey_ === 'hybrid' ? 'satellite' : layerProvider.copyrightKey_,
+      searchMap = [].concat(latLngArray, map.getZoom(), mapType);
+    return searchMap.join(',');
   }
 };

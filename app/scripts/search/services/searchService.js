@@ -35,7 +35,7 @@ function searchService($q, Config, PlatformService, MapService, Logger, $locatio
           deferred.resolve(resp.results.items);
         }, function error(err) {
           Logger.error('Error during search', err);
-          deferred.resolve([]);
+          deferred.reject([]);
         });
 
         return deferred.promise;

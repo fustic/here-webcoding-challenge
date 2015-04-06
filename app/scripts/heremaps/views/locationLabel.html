@@ -3,6 +3,7 @@
     <a class="label-pointer-direction"></a>
   </div>
   <div class="H_ib_content">
-    <a class="label-pointer-location" ng-href="/places/{{locationLabel.locationId}}/">{{locationLabel.title}} </a>
+    <a class="label-pointer-location" ng-href="/places/{{locationLabel.placeId}}/" ng-if="locationLabel.placeId">{{locationLabel.title}} </a>
+    <a class="label-pointer-location" ng-if="locationLabel.locationId" ng-click="locationLabel.searchPlace()">{{locationLabel.title}} </a>
   </div>
 </div>
