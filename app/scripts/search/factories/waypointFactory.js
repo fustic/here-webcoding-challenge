@@ -6,13 +6,15 @@ function waypointFactory(SearchService) {
   function Waypoint() {
     this.searchText = '';
     this.selectedItem = null;
+    this.waypoint = null;
   }
 
   Waypoint.prototype.querySearch = function querySearch() {
     return SearchService.search(this.searchText);
   };
-  Waypoint.prototype.selectedItemChange = function selectedItemChange(item) {
-    console.log(item);
+  Waypoint.prototype.selectedItemChange = function selectedItemChange() {
+    this.waypoint = this.selectedItem.position.join(',');
+    this.url = this.selectedItem.id + ':' + this.waypoint;
     this.checkAndCalculateRoute();
   };
   Waypoint.prototype.checkAndCalculateRoute = function checkAndCalculateRoute() {

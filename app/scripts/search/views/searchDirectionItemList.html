@@ -1,11 +1,11 @@
 <span ng-if="$first" class="iternaty-item-icon from">
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" class="ng-scope"><circle fill="#389CD6" cx="9.828" cy="10.165" r="8.25"></circle></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle fill="#389CD6" cx="9.828" cy="10.165" r="8.25"></circle></svg>
 </span>
 <span ng-if="!$first && !$last" class="iternaty-item-icon">
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" class="ng-scope"><circle fill="#fff" stroke="#bfbfbf" stroke-width="2.2" cx="9" cy="10" r="7.5"></circle></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle fill="#fff" stroke="#bfbfbf" stroke-width="2.2" cx="9" cy="10" r="7.5"></circle></svg>
 </span>
 <span ng-if="$last" class="iternaty-item-icon to">
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" class="ng-scope"><circle fill="#fff" cx="10" cy="10" r="8.029"></circle><g><path fill="#111623" d="M14.316 16.764c.98-.63 1.816-1.464 2.445-2.445h-2.444v2.444zM14.316 5.684V3.236C13.068 2.438 11.59 1.97 10 1.97v3.714h4.316zM5.684 3.236c-.984.63-1.82 1.464-2.448 2.448h2.448V3.236zM5.685 14.316v2.447c1.247.8 2.725 1.267 4.315 1.267v-3.714H5.685zM14.316 10H10V5.683H5.684V10H1.97c0 1.59.47 3.068 1.267 4.316h2.447V10H10v4.316h4.316V10h3.713c0-1.59-.47-3.07-1.267-4.316h-2.447V10z"></path></g></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle fill="#fff" cx="10" cy="10" r="8.029"></circle><g><path fill="#111623" d="M14.316 16.764c.98-.63 1.816-1.464 2.445-2.445h-2.444v2.444zM14.316 5.684V3.236C13.068 2.438 11.59 1.97 10 1.97v3.714h4.316zM5.684 3.236c-.984.63-1.82 1.464-2.448 2.448h2.448V3.236zM5.685 14.316v2.447c1.247.8 2.725 1.267 4.315 1.267v-3.714H5.685zM14.316 10H10V5.683H5.684V10H1.97c0 1.59.47 3.068 1.267 4.316h2.447V10H10v4.316h4.316V10h3.713c0-1.59-.47-3.07-1.267-4.316h-2.447V10z"></path></g></svg>
 </span>
 <md-button ng-if="$last && searchDirections.waypoints.length < searchDirections.data.maxWaypoints"
            ng-click="searchDirections.addWaypoint()"

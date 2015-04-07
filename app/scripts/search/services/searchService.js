@@ -6,15 +6,13 @@ var
 
 searchService.$inject = [
   '$q',
-  'Heremaps.Config',
   'PlatformService',
   'MapService',
   'LoggerService',
-  '$location',
   '$http'
 ];
 
-function searchService($q, Config, PlatformService, MapService, Logger, $location, $http) {
+function searchService($q, PlatformService, MapService, Logger, $http) {
 
   function getPlacesService() {
     if (!placesService) {
@@ -22,9 +20,15 @@ function searchService($q, Config, PlatformService, MapService, Logger, $locatio
     }
     return placesService;
   }
+  function getRouter() {
+    if (!router) {
+      router = PlatformService.getPlatform().getRoutingService();
+    }
+    return router;
+  }
   var
     placesService,
-    entryPoint = H.service.PlacesService.EntryPoint,
+    router,
     searchServiceObject = {
       search: function search(query) {
         var deferred = $q.defer();
@@ -53,6 +57,29 @@ function searchService($q, Config, PlatformService, MapService, Logger, $locatio
           return resp.data;
         });
 
+      },
+      calculateRoute: function calculateRoute(waypoints, mode) {
+        var
+          deferred = $q.defer(),
+          params = {
+            mode: 'fastest;' + mode,
+            representation: 'display',
+            language: 'en-gb'
+          };
+
+        waypoints.forEach(function (waypoint, i) {
+          params['waypoint' + i] = waypoint.waypoint;
+        });
+        getRouter().calculateRoute(params, function success(result) {
+          var route = result.response && result.response.route[0];
+          if (route) {
+            return deferred.resolve(route);
+          }
+          return result.reject();
+        }, function error(err) {
+          deferred.reject(err);
+        });
+        return deferred.promise;
       }
     };
 

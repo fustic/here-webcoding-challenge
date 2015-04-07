@@ -1,10 +1,17 @@
 'use strict';
 var utils = require('../../common').utils;
 searchDirectionsController.$inject = [
-  'WaypointFactory', '$location', 'MapService', 'Heremaps.Enums'
+  'WaypointFactory',
+  '$location',
+  'MapService',
+  'Heremaps.Enums',
+  'SearchService',
+  'UtilService',
+  'MarkersService'
 ];
 
-function searchDirectionsController(WaypointFactory, $location, MapService, Enums) {
+function searchDirectionsController(WaypointFactory, $location, MapService, Enums, SearchService, UtilService,
+                                    MarkersService) {
 
   this.data = {
     maxWaypoints: 5,
@@ -32,7 +39,21 @@ function searchDirectionsController(WaypointFactory, $location, MapService, Enum
 
 
   function checkAndCalculateRouteFn() {
-    console.log(this.waypoints);
+    if (!(this.waypoints && this.waypoints.length >= 2)) {
+      return;
+    }
+    var
+      waypointsLength = this.waypoints.length;
+    while (waypointsLength--) {
+      if (!this.waypoints[waypointsLength].waypoint) {
+        return;
+      }
+    }
+    SearchService.calculateRoute(this.waypoints, this.mode).then(function success(route) {
+      MarkersService.showRoute(route);
+    }, function error() {
+      UtilService.showErrorMessage('Can not calculate a route for you');
+    });
   }
   var checkAndCalculateRoute = checkAndCalculateRouteFn.bind(this);
   WaypointFactory.prototype.checkAndCalculateRoute = checkAndCalculateRoute;
@@ -49,20 +70,20 @@ function searchDirectionsController(WaypointFactory, $location, MapService, Enum
 
   this.addWaypoint = function addWaypoint() {
     if (this.waypoints.length < this.data.maxWaypoints) {
-      this.waypoints.splice(this.waypoints.length - 1, 0, {});
+      this.waypoints.splice(this.waypoints.length - 1, 0, new WaypointFactory());
     }
   };
   this.removeWaypoint = function removeWaypoint(index) {
     if (index > 0 && index < this.waypoints.length - 1) {
+      this.waypoints[index] = null;
       this.waypoints.splice(index, 1);
     }
+    checkAndCalculateRoute();
   };
   this.reverseDirection = function reverseDirection() {
     this.waypoints.reverse();
+    checkAndCalculateRoute();
   };
 
-  this.search = {
-
-  };
 }
 module.exports = searchDirectionsController;
