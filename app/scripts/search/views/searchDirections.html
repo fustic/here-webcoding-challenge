@@ -14,7 +14,8 @@
     </md-button>
   </div>
 
-  <md-radio-group ng-model="searchDirections.mode" layout="row" layout-align="space-between center">
+  <md-radio-group ng-model="searchDirections.mode" layout="row" layout-align="space-between start">
     <md-radio-button ng-repeat="mode in searchDirections.data.modes" value="{{mode.value}}">{{mode.title}}</md-radio-button>
   </md-radio-group>
+  <direction-info class="direction-info"></direction-info>
 </div>

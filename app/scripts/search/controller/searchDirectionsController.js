@@ -1,10 +1,10 @@
 'use strict';
 var utils = require('../../common').utils;
 searchDirectionsController.$inject = [
-  'SearchService', '$location', 'MapService', 'Heremaps.Enums'
+  'WaypointFactory', '$location', 'MapService', 'Heremaps.Enums'
 ];
 
-function searchDirectionsController(SearchService, $location, MapService, Enums) {
+function searchDirectionsController(WaypointFactory, $location, MapService, Enums) {
 
   this.data = {
     maxWaypoints: 5,
@@ -27,10 +27,15 @@ function searchDirectionsController(SearchService, $location, MapService, Enums)
   this.mode = this.data.modes[0].value;
   this.waypoints = [];
 
-  this.waypoints.push({});
-  this.waypoints.push({});
-  this.waypoints.push({});
-  this.waypoints.push({});
+  this.waypoints.push(new WaypointFactory());
+  this.waypoints.push(new WaypointFactory());
+
+
+  function checkAndCalculateRouteFn() {
+    console.log(this.waypoints);
+  }
+  var checkAndCalculateRoute = checkAndCalculateRouteFn.bind(this);
+  WaypointFactory.prototype.checkAndCalculateRoute = checkAndCalculateRoute;
 
   this.getPlaceHolder = function getPlaceHolder(index) {
     if (index === 0) {
@@ -54,6 +59,10 @@ function searchDirectionsController(SearchService, $location, MapService, Enums)
   };
   this.reverseDirection = function reverseDirection() {
     this.waypoints.reverse();
+  };
+
+  this.search = {
+
   };
 }
 module.exports = searchDirectionsController;

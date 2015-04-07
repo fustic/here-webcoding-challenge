@@ -18,11 +18,11 @@
   ng-class="{'last-item-element': $last, 'iternaty-item-bar': !$first}"
   md-delay="400"
   md-autofocus="true"
-  md-selected-item="searchPlaces.search.selectedItem"
-  md-search-text="searchPlaces.search.searchText"
-  md-selected-item-change="searchPlaces.search.selectedItemChange(item)"
-  md-items="item in searchPlaces.search.querySearch(searchPlaces.search.searchText)"
-  md-item-text="item.title"
+  md-selected-item="waypoint.selectedItem"
+  md-search-text="waypoint.searchText"
+  md-selected-item-change="waypoint.selectedItemChange(item)"
+  md-items="item in waypoint.querySearch(waypoint.searchText)"
+  md-item-text="item | waypointTitle"
   placeholder="{{searchDirections.getPlaceHolder($index)}}">
 
 
