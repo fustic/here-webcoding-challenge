@@ -25,6 +25,12 @@ function searchDirectionsController(SearchService, $location, MapService, Enums)
       return Enums.DIRECTION_TYPES.TO;
     }
     return Enums.DIRECTION_TYPES.VIA;
-  }
+  };
+
+  this.addWaypoint = function addWaypoint() {
+    if (this.waypoints.length < this.data.maxWaypoints) {
+      this.waypoints.splice(this.waypoints.length - 2, 1, {});
+    }
+  };
 }
 module.exports = searchDirectionsController;
