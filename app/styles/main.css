@@ -331,4 +331,5 @@ md-autocomplete.search-places, md-autocomplete.search-directions-autocomplete {
 }
 .direction-info {
   height: 225px;
+  padding-left: 15px;
 }

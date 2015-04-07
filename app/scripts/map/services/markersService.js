@@ -70,6 +70,9 @@ function markersService(Config, Enums, $compile, $rootScope) {
       map.addObject(marker);
     },
     showPointLabel: function showPointLabel(location) {
+      if (bubble) {
+        bubble.close();
+      }
       $pointLabelScope.locationLabel.setLocation(location);
       if (!pointLabelBubble) {
         pointLabelBubble = new H.ui.InfoBubble({
@@ -95,6 +98,9 @@ function markersService(Config, Enums, $compile, $rootScope) {
     showPlaceBubble: function showPlaceBubble(place) {
       if (pointLabelBubble) {
         pointLabelBubble.close();
+      }
+      if (bubble) {
+        bubble.close();
       }
       $placeScope.locationLabel.setPlace(place);
       if (!placeLabelBubble) {

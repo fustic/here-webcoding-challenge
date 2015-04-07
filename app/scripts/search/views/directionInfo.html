@@ -1,0 +1,11 @@
+<div layout="row" layout-align="space-around start">
+  <md-input-container>
+    <label>Time</label>
+    <input disabled ng-model="searchDirections.direction.time">
+  </md-input-container>
+  <md-input-container>
+    <label>Distance</label>
+    <input disabled ng-model="searchDirections.direction.distance">
+  </md-input-container>
+</div>
+<share-url ng-if="searchDirections.direction.distance"></share-url>

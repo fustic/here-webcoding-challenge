@@ -73,5 +73,29 @@ module.exports = {
       mapType = layerProvider.copyrightKey_ === 'hybrid' ? 'satellite' : layerProvider.copyrightKey_,
       searchMap = [].concat(latLngArray, map.getZoom(), mapType);
     return searchMap.join(',');
+  },
+  secondsRoundTime: function secondsRoundTime(seconds) {
+    var
+      days = Math.floor(seconds / (3600 * 24)),
+      hrs = Math.floor((seconds - days * 3600 * 24) / 3600),
+      mins = Math.ceil((seconds - hrs * 3600) / 60),
+      roundTime = [];
+    if (days > 0) {
+      roundTime.push(days + ' days');
+    }
+    if (hrs > 0) {
+      roundTime.push(hrs + ' hrs');
+    }
+    if (mins > 0) {
+      roundTime.push(mins + ' mins');
+    }
+    return roundTime.join(', ');
+  },
+  metersRoundDistance: function metersRoundDistance(meters) {
+    var
+      kms = Math.floor(meters / 1000),
+      meters = Math.ceil((meters - kms * 1000) / 100);
+
+    return kms + '.' + (meters + '')[0] + ' km';
   }
 };

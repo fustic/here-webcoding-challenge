@@ -13,7 +13,8 @@ var
     'ui.router',
     'ngMessages',
     'ngMaterial',
-    'ngSanitize'
+    'ngSanitize',
+    'badwing.autoselect'
   ])
     .constant('Heremaps.Enums', require('../config/enums'))
     .constant('Heremaps.Config', appConfig)
@@ -30,7 +31,9 @@ var
     }])
     .directive('hereMap', require('./directives/hereMap'))
     .directive('userCurrentLocation', require('./directives/userCurrentLocationDirective'))
+    .directive('shareUrl', require('./directives/shareUrlDirective'))
     .controller('UserCurrentLocationController', require('./controllers/userCurrentLocationController'))
+    .controller('ShareUrlController', require('./controllers/shareUrlController'))
     .service('UtilService', require('./services/utilService'))
     .run(['LoggerService', function (LoggerService) {
       LoggerService.consolelog('the app started, ver.: ' + appConfig.version);

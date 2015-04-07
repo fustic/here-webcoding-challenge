@@ -56,7 +56,7 @@ function userService($http, $q, Config, $location) {
       return $http.get(Config.shortener.url, {
         params: {
           access_token: Config.shortener.accessToken,
-          longUrl: encodeURIComponent(url)
+          longUrl: url
         }
       });
     }

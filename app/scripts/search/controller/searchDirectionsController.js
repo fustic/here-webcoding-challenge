@@ -14,8 +14,6 @@ searchDirectionsController.$inject = [
 function searchDirectionsController(WaypointFactory, $location, Enums, SearchService, UtilService, MarkersService,
                                     $stateParams, $scope) {
 
-  console.log($stateParams);
-
   this.data = {
     minWaypoints: 2,
     maxWaypoints: 5,
@@ -34,7 +32,10 @@ function searchDirectionsController(WaypointFactory, $location, Enums, SearchSer
       }
     ]
   };
-
+  this.direction = {
+    distance: 0,
+    time: 0
+  };
   var
     modesLen = this.data.modes.length;
   this.mode = this.data.modes[0].value;
@@ -75,11 +76,23 @@ function searchDirectionsController(WaypointFactory, $location, Enums, SearchSer
     }
     SearchService.calculateRoute(this.waypoints, this.mode).then(function success(route) {
       MarkersService.showRoute(route);
-      var urlParts = [];
+      var
+        urlParts = [],
+        distance = 0,
+        travelTime = 0;
       this.waypoints.forEach(function (waypoint) {
         urlParts.push(waypoint.url);
       });
       $location.path('/routes/' + this.mode + '/' + urlParts.join(';') + '/');
+
+      route.leg.forEach(function (leg) {
+        leg.maneuver.forEach(function (maneuver) {
+          distance += maneuver.length;
+          travelTime += maneuver.travelTime;
+        });
+      });
+      this.direction.distance = utils.metersRoundDistance(distance);
+      this.direction.time = utils.secondsRoundTime(travelTime);
     }.bind(this), function error() {
       UtilService.showErrorMessage('Can not calculate a route for you');
     });

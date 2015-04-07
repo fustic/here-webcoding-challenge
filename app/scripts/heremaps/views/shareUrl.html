@@ -1,0 +1,15 @@
+<div layout="row" layout-align="space-around center">
+  <md-input-container>
+    <label>URL</label>
+    <input ng-model="shareUrl.url" auto-select="shareUrl.autoSelectOptions" disabled>
+    <md-tooltip ng-if="shareUrl.url"
+                md-visible="shareUrl.showTooltip"
+                md-autohide="true"
+                md-direction="bottom">
+      Press ctrl/cmd + C to copy
+    </md-tooltip>
+  </md-input-container>
+  <md-button class="md-accent md-raised" ng-click="shareUrl.createUrl()">
+    Share Route
+  </md-button>
+</div>

@@ -22,6 +22,7 @@ var
     .directive('searchDirections', require('./directives/searchDirectionDirective'))
     .directive('searchDirectionItemList', require('./directives/searchDirectionItemList'))
     .directive('placeInformation', require('./directives/placeInformationDirective'))
+    .directive('directionInfo', require('./directives/directionInfoDirective'))
     .factory('WaypointFactory', require('./factories/waypointFactory'))
     .service('SearchService', require('./services/searchService'));
 
