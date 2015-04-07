@@ -10,20 +10,21 @@ function searchDirectionsController(SearchService, $location, MapService, Enums)
     maxWaypoints: 5,
     modes: [
       {
-        title: 'by Car',
+        title: 'Car',
         value: 'car'
       },
       {
-        title: 'by Public Transport',
+        title: 'Public Transport',
         value: 'publicTransport'
       },
       {
-        title: 'by Walkinkg',
-        value: ''
+        title: 'Walk',
+        value: 'pedestrian'
       }
     ]
   };
 
+  this.mode = this.data.modes[0].value;
   this.waypoints = [];
 
   this.waypoints.push({});
