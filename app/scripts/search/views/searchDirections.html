@@ -9,13 +9,19 @@
     </md-list>
   </div>
   <div flex="10" layout="row" layout-align="center center">
-    <md-button class="md-fab md-raised search-direction-reverse" aria-label="reverse route" ng-click="searchDirections.reverseDirection()">
+    <md-button class="md-fab md-raised search-direction-reverse"
+               aria-label="reverse route"
+               ng-click="searchDirections.reverseDirection()">
       <md-tooltip md-direction="left" md-autohide="true">Reverse route</md-tooltip>
     </md-button>
   </div>
 
   <md-radio-group ng-model="searchDirections.mode" layout="row" layout-align="space-between start">
-    <md-radio-button ng-repeat="mode in searchDirections.data.modes" value="{{mode.value}}">{{mode.title}}</md-radio-button>
+    <md-radio-button ng-repeat="mode in searchDirections.data.modes"
+                     value="{{mode.value}}"
+                     ng-click="searchDirections.changeDirectionModeType(mode.value)">
+      {{mode.title}}
+    </md-radio-button>
   </md-radio-group>
   <direction-info class="direction-info"></direction-info>
 </div>

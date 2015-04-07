@@ -4,20 +4,29 @@ searchController.$inject = [
   'Heremaps.Enums',
   'searchState',
   '$stateParams',
-  'MapService'
+  'MapService',
+  '$rootScope',
+  '$scope'
 ];
 
-function searchController(Enums, searchState, $stateParams, MapService) {
+function searchController(Enums, searchState, $stateParams, MapService, $rootScope, $scope) {
   var
-    tabsList = [Enums.SEARCH_STATE.PLACES, Enums.SEARCH_STATE.ROUTES];
+    tabsList = [Enums.SEARCH_STATE.PLACES, Enums.SEARCH_STATE.ROUTES],
+    mapConfig = utils.parseMapParams($stateParams.map),
+    addDirectionEvent = $rootScope.$on(Enums.EVENTS.ADD_DIRECTION, function () {
+      this.tabs.selectedIndex = tabsList.indexOf(Enums.SEARCH_STATE.ROUTES);
+    }.bind(this));
   this.tabs = {
     selectedIndex: tabsList.indexOf(searchState)
   };
   this.placeID = $stateParams.placeID;
 
-  var mapConfig = utils.parseMapParams($stateParams.map);
   if (mapConfig) {
     MapService.updateMap(mapConfig);
   }
+
+  $scope.$on('$destroy', function () {
+    addDirectionEvent();
+  });
 }
 module.exports = searchController;

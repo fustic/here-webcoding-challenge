@@ -3,8 +3,10 @@
     <img ng-src="{{placeInfo.place.icon}}" class="place-information-toolbar-image"/>
     <h3 class="md-flex"
         ng-bind-template="{{placeInfo.place.name}}"></h3>
-    <md-button class="md-fab md-accent place-information-get-directions" aria-label="Get directions">
-      <md-tooltip md-direction="left" md-autohide="true">Get directions</md-tooltip>
+    <md-button class="md-fab md-accent place-information-get-directions"
+               aria-label="Get directions"
+               ng-click="placeInfo.addDirection()">
+      <!--<md-tooltip md-direction="left" md-visible="placeInfo.showTooltip">Get directions</md-tooltip>-->
       <i class="mdi mdi-directions icon--l"></i>
     </md-button>
   </div>

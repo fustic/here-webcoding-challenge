@@ -27,7 +27,8 @@ function waypointFactory(SearchService, $filter) {
     this.waypoint = this.selectedItem.position && this.selectedItem.position.join(',') || this.waypoint;
     this.url = (this.selectedItem.id || this.selectedItem.placeId || this.placeID) + ':' + this.waypoint;
     if (!this.searchText) {
-      this.searchText = this.selectedItem.name + ', ' + vicinityFilter(this.selectedItem.location.address.text);
+      this.searchText = this.selectedItem.name + ', ' +
+        vicinityFilter(this.selectedItem.location.address && this.selectedItem.location.address.text);
     }
     this.checkAndCalculateRoute();
   };

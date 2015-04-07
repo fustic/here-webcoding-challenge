@@ -2,9 +2,16 @@
 
 var utils = require('../../common').utils;
 
-locationLabelController.$inject = ['SearchService', 'UtilService', '$location', 'MapService'];
+locationLabelController.$inject = [
+  'SearchService',
+  'UtilService',
+  '$location',
+  'MapService',
+  '$rootScope',
+  'Heremaps.Enums'
+];
 
-function locationLabelController(SearchService, UtilService, $location, MapService) {
+function locationLabelController(SearchService, UtilService, $location, MapService, $rootScope, Enums) {
   this.geo = {
     lat: 0,
     lng: 0
@@ -42,6 +49,19 @@ function locationLabelController(SearchService, UtilService, $location, MapServi
     }, function error(err) {
       UtilService.showErrorMessage('Can not find place for your location', err);
     });
+  };
+
+  this.addDirection = function addDirection() {
+    if (this.placeId) {
+      $rootScope.$emit(Enums.EVENTS.ADD_DIRECTION, this.geo.lat + ',' + this.geo.lng, this.placeId);
+    } else {
+      SearchService.search(this.geo.lat + ',' + this.geo.lng).then(function success(items) {
+        var item = items[0];
+        if (item && item.id) {
+          $rootScope.$emit(Enums.EVENTS.ADD_DIRECTION, item.position.join(','), item.id);
+        }
+      });
+    }
   };
 }
 

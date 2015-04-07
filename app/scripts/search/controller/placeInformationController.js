@@ -1,14 +1,15 @@
 'use strict';
 var utils = require('../../common').utils;
 placeInformationController.$inject = [
-  'SearchService', '$scope', 'MarkersService', 'UtilService', '$filter'
+  'SearchService', '$rootScope', '$scope', 'MarkersService', 'UtilService', '$filter', 'Heremaps.Enums'
 ];
 
-function placeInformationController(SearchService, $scope, MarkersService, UtilService, $filter) {
+function placeInformationController(SearchService, $rootScope, $scope, MarkersService, UtilService, $filter, Enums) {
   var
     placeID = $scope.placeId,
     addressFilter = $filter('vicinity');
   this.place = null;
+  this.showTooltip = true;
 
   SearchService.place(placeID).then(function success(place) {
     this.place = place;
@@ -29,5 +30,11 @@ function placeInformationController(SearchService, $scope, MarkersService, UtilS
   }.bind(this), function error(err) {
     UtilService.showErrorMessage(err.data.message);
   });
+
+  this.addDirection = function addDirection() {
+    this.showTooltip = false;
+    $rootScope.$emit(Enums.EVENTS.ADD_DIRECTION, this.place.location.position.join(','), this.place.placeId);
+  };
+
 }
 module.exports = placeInformationController;

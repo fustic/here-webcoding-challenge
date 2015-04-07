@@ -4,34 +4,19 @@ searchDirectionsController.$inject = [
   'WaypointFactory',
   '$location',
   'Heremaps.Enums',
+  'Heremaps.Config',
   'SearchService',
   'UtilService',
   'MarkersService',
   '$stateParams',
+  '$rootScope',
   '$scope'
 ];
 
-function searchDirectionsController(WaypointFactory, $location, Enums, SearchService, UtilService, MarkersService,
-                                    $stateParams, $scope) {
+function searchDirectionsController(WaypointFactory, $location, Enums, Config, SearchService, UtilService,
+                                    MarkersService, $stateParams, $rootScope, $scope) {
 
-  this.data = {
-    minWaypoints: 2,
-    maxWaypoints: 5,
-    modes: [
-      {
-        title: 'Car',
-        value: 'car'
-      },
-      {
-        title: 'Public Transport',
-        value: 'publicTransport'
-      },
-      {
-        title: 'Walk',
-        value: 'pedestrian'
-      }
-    ]
-  };
+  this.data = Config.directions;
   this.direction = {
     distance: 0,
     time: 0
@@ -44,7 +29,24 @@ function searchDirectionsController(WaypointFactory, $location, Enums, SearchSer
   };
 
   var
-    modesLen = this.data.modes.length;
+    modesLen = this.data.modes.length,
+    route = $stateParams.route && $stateParams.route.split(';') || [],
+    i,
+    addDirectionEvent = $rootScope.$on(Enums.EVENTS.ADD_DIRECTION, function (event, geo, placeId) {
+      var
+        lastWaypoint = this.waypoints[this.waypoints.length - 1];
+      if (this.waypoints.length < this.data.maxWaypoints) {
+        if (lastWaypoint.waypoint) {
+          this.waypoints.push(new WaypointFactory(placeId, geo));
+        } else {
+          this.waypoints[this.waypoints.length - 1] = new WaypointFactory(placeId, geo);
+        }
+      } else {
+        lastWaypoint = null;
+        this.waypoints[this.waypoints.length - 1] = new WaypointFactory(placeId, geo);
+      }
+    }.bind(this));
+
   this.mode = this.data.modes[0].value;
   while (modesLen--) {
     if (this.data.modes[modesLen].value === $stateParams.mode) {
@@ -53,10 +55,6 @@ function searchDirectionsController(WaypointFactory, $location, Enums, SearchSer
     }
   }
   this.waypoints = [];
-
-  var
-    route = $stateParams.route && $stateParams.route.split(';') || [],
-    i;
 
   route.forEach(function (r) {
     var
@@ -107,10 +105,6 @@ function searchDirectionsController(WaypointFactory, $location, Enums, SearchSer
   var checkAndCalculateRoute = checkAndCalculateRouteFn.bind(this);
   WaypointFactory.prototype.checkAndCalculateRoute = checkAndCalculateRoute;
 
-  $scope.$watch(function () {
-    return this.mode;
-  }.bind(this), checkAndCalculateRoute);
-
   this.getPlaceHolder = function getPlaceHolder(index) {
     if (index === 0) {
       return Enums.DIRECTION_TYPES.FROM;
@@ -138,5 +132,13 @@ function searchDirectionsController(WaypointFactory, $location, Enums, SearchSer
     checkAndCalculateRoute();
   };
 
+  this.changeDirectionModeType = function changeDirectionModeType(value) {
+    this.mode = value;
+    checkAndCalculateRoute();
+  };
+
+  $scope.$on('$destroy', function () {
+    addDirectionEvent();
+  });
 }
 module.exports = searchDirectionsController;

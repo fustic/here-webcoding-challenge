@@ -25,6 +25,24 @@
       "currentPosition": "rgb(64,196,255)"
     }
   },
+  "directions": {
+    "minWaypoints": 2,
+    "maxWaypoints": 5,
+    "modes": [
+      {
+        "title": "Car",
+        "value": "car"
+      },
+      {
+        "title": "Public Transport",
+        "value": "publicTransport"
+      },
+      {
+        "title": "Walk",
+        "value": "pedestrian"
+      }
+    ]
+  },
   "location": {
     "lat": "52.53102",
     "lng": "13.38481"

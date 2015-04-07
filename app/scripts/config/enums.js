@@ -27,5 +27,8 @@ module.exports = {
     FROM: 'From',
     VIA: 'via',
     TO: 'To'
+  },
+  EVENTS: {
+    ADD_DIRECTION: 'adddirection'
   }
 };
