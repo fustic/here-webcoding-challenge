@@ -1,0 +1,16 @@
+<div layout="row" layout-wrap class="search-directions">
+  <div flex="90">
+    <md-list>
+      <md-item-list search-direction-item-list
+                    layout="row" layout-align="start center"
+                    class="search-direction-item-list"
+                    ng-class="{'search-direction-item-list-border': !$last}"
+                    ng-repeat="waypoint in searchDirections.waypoints"></md-item-list>
+    </md-list>
+  </div>
+  <div flex="10" layout="row" layout-align="center center">
+    <md-button class="md-fab md-raised search-direction-reverse" aria-label="reverse route">
+      <md-tooltip md-direction="left" md-autohide="true">Reverse route</md-tooltip>
+    </md-button>
+  </div>
+</div>

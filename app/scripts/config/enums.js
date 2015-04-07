@@ -22,5 +22,10 @@ module.exports = {
   BUBBLE_STATES: {
     OPEN: 'open',
     CLOSED: 'closed'
+  },
+  DIRECTION_TYPES: {
+    FROM: 'From',
+    VIA: 'via',
+    TO: 'To'
   }
 };
