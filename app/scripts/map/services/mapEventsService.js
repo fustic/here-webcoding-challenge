@@ -21,12 +21,8 @@ function mapEventsService($q, Config, $location, $rootScope, GeocodingService) {
   return {
     bindEvents: function bindEvents(map) {
       var
-        mapChanges = mapChangesWatcher.bind(map),
-        initEvents = function () {
-          map.removeEventListener('mapviewchangeend', initEvents);
-          map.addEventListener('mapviewchangeend', mapChanges);
-        };
-      map.addEventListener('mapviewchangeend', initEvents);
+        mapChanges = mapChangesWatcher.bind(map);
+      map.addEventListener('mapviewchangeend', mapChanges);
       map.addEventListener('baselayerchange', mapChanges);
       map.addEventListener('tap', function (event) {
         GeocodingService.showPointLabel(

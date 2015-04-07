@@ -3,15 +3,18 @@ var utils = require('../../common').utils;
 searchDirectionsController.$inject = [
   'WaypointFactory',
   '$location',
-  'MapService',
   'Heremaps.Enums',
   'SearchService',
   'UtilService',
-  'MarkersService'
+  'MarkersService',
+  '$stateParams',
+  '$scope'
 ];
 
-function searchDirectionsController(WaypointFactory, $location, MapService, Enums, SearchService, UtilService,
-                                    MarkersService) {
+function searchDirectionsController(WaypointFactory, $location, Enums, SearchService, UtilService, MarkersService,
+                                    $stateParams, $scope) {
+
+  console.log($stateParams);
 
   this.data = {
     maxWaypoints: 5,
@@ -31,7 +34,15 @@ function searchDirectionsController(WaypointFactory, $location, MapService, Enum
     ]
   };
 
+  var
+    modesLen = this.data.modes.length;
   this.mode = this.data.modes[0].value;
+  while (modesLen--) {
+    if (this.data.modes[modesLen].value === $stateParams.mode) {
+      this.mode = $stateParams.mode;
+      break;
+    }
+  }
   this.waypoints = [];
 
   this.waypoints.push(new WaypointFactory());
@@ -51,13 +62,20 @@ function searchDirectionsController(WaypointFactory, $location, MapService, Enum
     }
     SearchService.calculateRoute(this.waypoints, this.mode).then(function success(route) {
       MarkersService.showRoute(route);
-    }, function error() {
+      var urlParts = [];
+      this.waypoints.forEach(function (waypoint) {
+        urlParts.push(waypoint.url);
+      });
+      $location.path('/routes/' + this.mode + '/' + urlParts.join(';') + '/');
+    }.bind(this), function error() {
       UtilService.showErrorMessage('Can not calculate a route for you');
     });
   }
   var checkAndCalculateRoute = checkAndCalculateRouteFn.bind(this);
   WaypointFactory.prototype.checkAndCalculateRoute = checkAndCalculateRoute;
-
+  $scope.$watch(function () {
+    return this.mode;
+  }.bind(this), checkAndCalculateRoute);
   this.getPlaceHolder = function getPlaceHolder(index) {
     if (index === 0) {
       return Enums.DIRECTION_TYPES.FROM;

@@ -3,10 +3,15 @@
 waypointFactory.$inject = ['SearchService'];
 
 function waypointFactory(SearchService) {
-  function Waypoint() {
+  function Waypoint(placeID, waypoint) {
     this.searchText = '';
     this.selectedItem = null;
-    this.waypoint = null;
+    this.waypoint = waypoint || null;
+    if (placeID) {
+      SearchService.place(placeID).then(function success(place) {
+        this.selectedItem = place;
+      }.bind(this));
+    }
   }
 
   Waypoint.prototype.querySearch = function querySearch() {

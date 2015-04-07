@@ -33,10 +33,10 @@ function searchRouter($stateProvider, $urlRouterProvider) {
       url: '/places/:placeID/?map',
       reloadOnSearch: true
     }));
-
+  $urlRouterProvider.when('/routes/', '/routes/car//');
   $stateProvider
     .state('routes', {
-      url: '/routes/?map',
+      url: '/routes/:mode/:route/?map',
       templateUrl: '/scripts/search/views/search.html',
       controller: 'SearchController',
       controllerAs: 'search',
