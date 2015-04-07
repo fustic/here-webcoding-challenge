@@ -14,7 +14,8 @@ var
     'ngMessages',
     'ngMaterial',
     'ngSanitize',
-    'badwing.autoselect'
+    'badwing.autoselect',
+    'ng-sortable'
   ])
     .constant('Heremaps.Enums', require('../config/enums'))
     .constant('Heremaps.Config', appConfig)

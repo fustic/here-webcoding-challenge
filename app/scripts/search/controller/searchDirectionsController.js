@@ -36,6 +36,13 @@ function searchDirectionsController(WaypointFactory, $location, Enums, SearchSer
     distance: 0,
     time: 0
   };
+  this.sortOptions = {
+    handle: '.draggable',
+    onSort: function onSort() {
+      checkAndCalculateRoute();
+    }
+  };
+
   var
     modesLen = this.data.modes.length;
   this.mode = this.data.modes[0].value;

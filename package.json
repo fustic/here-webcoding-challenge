@@ -17,7 +17,6 @@
     "npm": ">=2.1.0"
   },
   "browserify-shim": {
-    "_": "global:_",
     "angular": "global:angular",
     "H": "global:H"
   },

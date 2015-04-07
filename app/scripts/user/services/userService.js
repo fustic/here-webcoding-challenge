@@ -1,7 +1,5 @@
 'use strict';
 
-var _ = require('_');
-
 userService.$inject = [
   '$http',
   '$q',

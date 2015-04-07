@@ -333,3 +333,6 @@ md-autocomplete.search-places, md-autocomplete.search-directions-autocomplete {
   height: 225px;
   padding-left: 15px;
 }
+.draggable {
+  cursor: move;
+}
