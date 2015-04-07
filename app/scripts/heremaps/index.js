@@ -41,15 +41,14 @@ var
         $rootScope.$stateParams = $stateParams;
         $rootScope.$on('$stateChangeStart',
           function (event, toState, toParams, fromState, fromParams) {
-            //to keep search parameters
-            if (fromParams) {
-              Object.keys(fromParams).forEach(function (key) {
-                if (!toParams[key]) {
-                  toParams[key] = fromParams[key];
-                }
-              });
+            //to keep search map parameter
+            if (fromParams && fromParams.map && !toParams.map) {
+              toParams.map = fromParams.map;
             }
             $location.search(toParams);
+            if (fromState.name === toState.name && toState.name === 'place' && toParams.placeID === fromParams.placeID) {
+              event.preventDefault();
+            }
           }
         );
       }

@@ -2,9 +2,9 @@
 
 var utils = require('../../common').utils;
 
-locationLabelController.$inject = ['SearchService', 'UtilService', '$location', 'MapService'];
+locationLabelController.$inject = ['SearchService', 'UtilService', '$location', 'MapService', '$state'];
 
-function locationLabelController(SearchService, UtilService, $location, MapService) {
+function locationLabelController(SearchService, UtilService, $location, MapService, $state) {
   this.geo = {
     lat: 0,
     lng: 0
