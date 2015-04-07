@@ -6,6 +6,7 @@ searchDirectionsController.$inject = [
   'Heremaps.Enums',
   'Heremaps.Config',
   'SearchService',
+  'UserService',
   'UtilService',
   'MarkersService',
   '$stateParams',
@@ -13,7 +14,7 @@ searchDirectionsController.$inject = [
   '$scope'
 ];
 
-function searchDirectionsController(WaypointFactory, $location, Enums, Config, SearchService, UtilService,
+function searchDirectionsController(WaypointFactory, $location, Enums, Config, SearchService, UserService, UtilService,
                                     MarkersService, $stateParams, $rootScope, $scope) {
 
   this.data = Config.directions;
@@ -35,6 +36,18 @@ function searchDirectionsController(WaypointFactory, $location, Enums, Config, S
     addDirectionEvent = $rootScope.$on(Enums.EVENTS.ADD_DIRECTION, function (event, geo, placeId) {
       var
         lastWaypoint = this.waypoints[this.waypoints.length - 1];
+
+      if (!this.waypoints[0].waypoint) {
+        UserService.getAnyLocation().then(function success(location) {
+          SearchService.search(location.lat + ',' + location.lng).then(function success(items) {
+            var item = items[0];
+            if (item) {
+              this.waypoints[0] = new WaypointFactory(item.id, item.position.join(','));
+            }
+          }.bind(this));
+        }.bind(this));
+      }
+
       if (this.waypoints.length < this.data.maxWaypoints) {
         if (lastWaypoint.waypoint) {
           this.waypoints.push(new WaypointFactory(placeId, geo));
