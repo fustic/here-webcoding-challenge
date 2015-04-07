@@ -12,9 +12,11 @@ function markersService(Config, Enums, $compile, $rootScope) {
     if (map) {
       if (polyline) {
         map.removeObject(polyline);
+        polyline = null;
       }
       if (routeGroup) {
         map.removeObject(routeGroup);
+        routeGroup = null;
       }
     }
   }
@@ -28,7 +30,30 @@ function markersService(Config, Enums, $compile, $rootScope) {
     pointLabelBubble,
     placeLabelBubble,
     polyline,
-    routeGroup;
+    routeGroup,
+  // Hold a reference to any infobubble opened
+    bubble;
+
+  /**
+   * Opens/Closes a infobubble
+   * @param  {H.geo.Point} position - The location on the map.
+   * @param  {String} text - The contents of the infobubble.
+   */
+  function openBubble(position, text){
+    if(!bubble){
+      bubble =  new H.ui.InfoBubble(
+        position,
+        {
+          content: text
+        }
+      );
+      ui.addBubble(bubble);
+    } else {
+      bubble.setPosition(position);
+      bubble.setContent(text);
+      bubble.open();
+    }
+  }
 
   return {
     setMap: function setMap(mapInstance) {
@@ -45,7 +70,6 @@ function markersService(Config, Enums, $compile, $rootScope) {
       map.addObject(marker);
     },
     showPointLabel: function showPointLabel(location) {
-      closeRoute();
       $pointLabelScope.locationLabel.setLocation(location);
       if (!pointLabelBubble) {
         pointLabelBubble = new H.ui.InfoBubble({
@@ -69,7 +93,6 @@ function markersService(Config, Enums, $compile, $rootScope) {
       }
     },
     showPlaceBubble: function showPlaceBubble(place) {
-      closeRoute();
       if (pointLabelBubble) {
         pointLabelBubble.close();
       }
@@ -139,7 +162,7 @@ function markersService(Config, Enums, $compile, $rootScope) {
             }, {
             icon: dotIcon
           });
-          marker.instruction = maneuver.instruction;
+          marker.text = maneuver.instruction;
           routeGroup.addObject(marker);
         }
       }
@@ -158,12 +181,17 @@ function markersService(Config, Enums, $compile, $rootScope) {
         }, {
           icon: new H.map.Icon(svgMarkup, {anchor: {x:29, y:30}})
         });
+        marker.text = waypoint.label;
         routeGroup.addObject(marker);
       }
-      // Add the maneuvers group to the map
+
+      routeGroup.addEventListener('tap', function (evt) {
+        openBubble(evt.target.getPosition(), evt.target.text);
+        evt.preventDefault();
+        evt.stopPropagation();
+      }, false);
+
       map.addObject(routeGroup);
-
-
     }
   };
 }

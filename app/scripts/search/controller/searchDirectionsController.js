@@ -17,6 +17,7 @@ function searchDirectionsController(WaypointFactory, $location, Enums, SearchSer
   console.log($stateParams);
 
   this.data = {
+    minWaypoints: 2,
     maxWaypoints: 5,
     modes: [
       {
@@ -45,9 +46,21 @@ function searchDirectionsController(WaypointFactory, $location, Enums, SearchSer
   }
   this.waypoints = [];
 
-  this.waypoints.push(new WaypointFactory());
-  this.waypoints.push(new WaypointFactory());
+  var
+    route = $stateParams.route && $stateParams.route.split(';') || [],
+    i;
 
+  route.forEach(function (r) {
+    var
+      params = r.split(':');
+    if (params && params.length >= 2) {
+      this.waypoints.push(new WaypointFactory(params[0], params[1]));
+    }
+  }.bind(this));
+
+  for (i = this.waypoints.length; i < this.data.minWaypoints; ++i) {
+    this.waypoints.push(new WaypointFactory());
+  }
 
   function checkAndCalculateRouteFn() {
     if (!(this.waypoints && this.waypoints.length >= 2)) {
@@ -73,9 +86,11 @@ function searchDirectionsController(WaypointFactory, $location, Enums, SearchSer
   }
   var checkAndCalculateRoute = checkAndCalculateRouteFn.bind(this);
   WaypointFactory.prototype.checkAndCalculateRoute = checkAndCalculateRoute;
+
   $scope.$watch(function () {
     return this.mode;
   }.bind(this), checkAndCalculateRoute);
+
   this.getPlaceHolder = function getPlaceHolder(index) {
     if (index === 0) {
       return Enums.DIRECTION_TYPES.FROM;
