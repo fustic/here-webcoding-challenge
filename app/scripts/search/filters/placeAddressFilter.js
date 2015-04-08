@@ -9,7 +9,9 @@ function placeAddressFilter($filter) {
    * @return {string}
    */
   return function (item) {
-    return item && (vicinityFilter(item.vicinity || item.location.address && item.location.address.text)) || '';
+    return item && (
+        vicinityFilter(item.vicinity || item.location && item.location.address && item.location.address.text)
+      ) || '';
   };
 }
 

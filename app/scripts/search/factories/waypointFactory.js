@@ -18,11 +18,11 @@ function waypointFactory(SearchService, $filter, MarkersService, UtilService, $l
     this.selectedItem = null;
     this.waypoint = waypoint || null;
     this.isCurrentLocation = false;
+    this.disabled = true;
     if (placeID) {
       SearchService.place(placeID).then(function success(place) {
         this.selectedItem = place;
       }.bind(this));
-      this.disabled = true;
     }
   }
 
@@ -69,7 +69,9 @@ function waypointFactory(SearchService, $filter, MarkersService, UtilService, $l
     if (!this.searchText) {
       this.searchText = waypointTitleFilter(this.selectedItem);
     }
-    SearchService.addSearchResultToRecent(this.selectedItem);
+    if (!this.disabled && !this.selectedItem.isCurrentLocation) {
+      SearchService.addSearchResultToRecent(this.selectedItem);
+    }
     this.checkAndCalculateRoute();
   };
   Waypoint.prototype.checkAndCalculateRoute = function checkAndCalculateRoute() {
