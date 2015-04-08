@@ -10,6 +10,7 @@ var
   templateCache = require('gulp-angular-templatecache'),
   source = require('vinyl-source-stream'),
   argv = require('yargs').argv,
+  nib = require('nib'),
   production = argv.staging || process.env.ENVIRONMENT === 'staging' ? false : true;
 
 gulp.task('styles', function () {
@@ -139,7 +140,7 @@ gulp.task('default', ['clean'], function () {
   gulp.start('build');
 });
 
-gulp.task('browserify', ['app-config', 'cache-templates'], function () {
+gulp.task('browserify', ['build-styles', 'app-config', 'cache-templates'], function () {
 
   var bundleStream = browserify({
     entries: ['./app/scripts/main.js'],
@@ -203,4 +204,14 @@ gulp.task('app-config', function () {
   return gulp.src(src.concat('bower.json'))
     .pipe($.extend('app.json'))
     .pipe(gulp.dest('app/scripts/config'));
+});
+
+gulp.task('build-styles', function () {
+  return gulp.src('app/styles/main.styl')
+    .pipe($.stylus({
+      compress: true,
+      'include css': true,
+      use: [nib()]
+    }))
+    .pipe(gulp.dest('app/styles'));
 });

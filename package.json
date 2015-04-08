@@ -1,7 +1,7 @@
 {
   "name": "here-webcoding-challenge",
   "description": "HERE Web Coding Challenge",
-  "version": "0.4.4",
+  "version": "0.6.2",
   "homepage": "https://github.com/fustic",
   "author": {
     "name": "Vadim Ivanov",
@@ -56,12 +56,14 @@
     "gulp-rev-all": "^0.7.6",
     "gulp-size": "^1.1.0",
     "gulp-streamify": "0.0.5",
+    "gulp-stylus": "^2.0.1",
     "gulp-uglify": "^1.0.1",
     "gulp-useref": "^1.0.2",
     "gulp-util": "^3.0.3",
     "jshint-stylish": "^1.0.0",
     "main-bower-files": "^2.1.0",
     "morgan": "^1.5.1",
+    "nib": "^1.1.0",
     "opn": "^1.0.0",
     "path": "^0.11.14",
     "postal": "^1.0.0",
