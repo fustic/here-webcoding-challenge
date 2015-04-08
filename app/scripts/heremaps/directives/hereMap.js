@@ -11,6 +11,9 @@ module.exports = ['$window', 'MapService', function ($window, MapService) {
         height: $window.innerHeight + 'px'
       });
       element.html('');
+      /**
+       * main point init map
+       */
       MapService.initMap(
         element[0],
         $window.devicePixelRatio || 1

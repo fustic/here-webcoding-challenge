@@ -8,7 +8,16 @@ searchController.$inject = [
   '$rootScope',
   '$scope'
 ];
-
+/**
+ * @class
+ * @name SearchController
+ * @param {HeremapsEnums} Enums
+ * @param {Object} searchState
+ * @param {$stateParams} $stateParams
+ * @param {MapService} MapService
+ * @param {$rootScope} $rootScope
+ * @param {$scope} $scope
+ */
 function searchController(Enums, searchState, $stateParams, MapService, $rootScope, $scope) {
   var
     tabsList = [Enums.SEARCH_STATE.PLACES, Enums.SEARCH_STATE.ROUTES],

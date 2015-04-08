@@ -1,12 +1,20 @@
 'use strict';
 
 var
-  H = require('H'),
   utils = require('../../common').utils;
 
-mapEventsService.$inject = ['$q', 'Heremaps.Config', '$location', '$rootScope', 'GeocodingService'];
+mapEventsService.$inject = ['$location', '$rootScope', 'GeocodingService'];
 
-function mapEventsService($q, Config, $location, $rootScope, GeocodingService) {
+/**
+ * @class
+ * @name MapEventsService
+ * @description bind events to the map
+ * @param {$location} $location
+ * @param {$rootScope} $rootScope
+ * @param {GeocodingService} GeocodingService
+ * @returns {{bindEvents: Function}}
+ */
+function mapEventsService($location, $rootScope, GeocodingService) {
 
   function mapChangesWatcher() {
     var
@@ -19,6 +27,12 @@ function mapEventsService($q, Config, $location, $rootScope, GeocodingService) {
   }
 
   return {
+    /**
+     * @this MapEventsService
+     * @doc method
+     * @description binding events to the passed map
+     * @param {Object} map
+     */
     bindEvents: function bindEvents(map) {
       var
         mapChanges = mapChangesWatcher.bind(map);

@@ -1,8 +1,6 @@
 'use strict';
 
-var
-  H = require('H'),
-  utils = require('../../common').utils;
+var utils = require('../../common').utils;
 
 searchService.$inject = [
   '$q',
@@ -13,6 +11,18 @@ searchService.$inject = [
   'HeremapsCacheFactory'
 ];
 
+/**
+ * @class
+ * @name SearchService
+ * @description represent Map search service
+ * @param {$q} $q
+ * @param {PlatformService} PlatformService
+ * @param {MapService} MapService
+ * @param {LoggerService} Logger
+ * @param {$http} $http
+ * @param {CacheFactory} CacheFactory
+ * @returns {{search: Function, place: Function, calculateRoute: Function, recentSearch: Function, addSearchResultToRecent: Function}}
+ */
 function searchService($q, PlatformService, MapService, Logger, $http, CacheFactory) {
 
   function getPlacesService() {
@@ -31,9 +41,17 @@ function searchService($q, PlatformService, MapService, Logger, $http, CacheFact
     maxRecentSearches = 5,
     /* jshint -W064 */
     cache = CacheFactory('search'),
+    // reference to local places service
     placesService,
     router,
     searchServiceObject = {
+      /**
+       * @this SearchService
+       * @name search
+       * @description search for a location
+       * @param {String} query
+       * @returns {Object}
+       */
       search: function search(query) {
         var deferred = $q.defer();
         getPlacesService().search({
@@ -48,8 +66,16 @@ function searchService($q, PlatformService, MapService, Logger, $http, CacheFact
 
         return deferred.promise;
       },
+      /**
+       * @this SearchService
+       * @name place
+       * @description search for a place by id
+       * @param {String} placeID
+       * @returns {Object}
+       */
       place: function place(placeID) {
         var url = getPlacesService().getUrl();
+        /*jshint camelcase: false */
         return $http.get(url.ra + '://' + url.R + '/' + url.d + '/places/lookup', {
           params: {
             app_id: url.g.app_id,
@@ -60,8 +86,15 @@ function searchService($q, PlatformService, MapService, Logger, $http, CacheFact
         }).then(function success(resp) {
           return resp.data;
         });
-
       },
+      /**
+       * @this SearchService
+       * @name calculateRoute
+       * @description calculateRoute for given array of waypoints
+       * @param {Waypoint[]} waypoints
+       * @param {String} mode
+       * @returns {Object} route
+       */
       calculateRoute: function calculateRoute(waypoints, mode) {
         var
           deferred = $q.defer(),
@@ -85,22 +118,39 @@ function searchService($q, PlatformService, MapService, Logger, $http, CacheFact
         });
         return deferred.promise;
       },
+      /**
+       * @this SearchService
+       * @name recentSearch
+       * @description return 5 recent places searched by user excluding given places
+       * @param {String[]} placeIDs
+       * @returns {Object[]}
+       */
       recentSearch: function recentSearch(placeIDs) {
         var
           deferred = $q.defer(),
           recent = (cache.get('recent') || []);
         placeIDs = placeIDs || [];
+        //if places to exclude were passed
         if (placeIDs.length) {
+          //exclude places from result
           recent = recent.filter(function (element) {
             return placeIDs.indexOf(element.id) === -1;
           });
         }
+        //return last 5 recent search results
         deferred.resolve(recent.slice(0, maxRecentSearches));
         return deferred.promise;
       },
+      /**
+       * @this SearchService
+       * @name addSearchResultToRecent
+       * @description add place to recent search results
+       * @param {Object} place
+       */
       addSearchResultToRecent: function (place) {
         var
           recent = cache.get('recent') || [];
+        //check if this place already exists in store
         if (recent.filter(function (element) {
             return element.id === place.id;
           }).length) {

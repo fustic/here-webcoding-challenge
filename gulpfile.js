@@ -23,7 +23,8 @@ gulp.task('jshint', function () {
   return gulp.src([
     'app/scripts/**/*.js',
     '!app/scripts/bundle.min.js',
-    '!app/scripts/templates.js'
+    '!app/scripts/templates.js',
+    '!app/scripts/external/**/*.js'
   ])
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))

@@ -1,10 +1,17 @@
 'use strict';
 
-var H = require('H');
+geocodingService.$inject = ['$q', 'PlatformService', 'LoggerService', 'MarkersService'];
 
-geocodingService.$inject = ['$q', 'Heremaps.Config', 'PlatformService', 'LoggerService', 'MarkersService'];
-
-function geocodingService($q, Config, PlatformService, Logger, MarkersService) {
+/**
+ * @class
+ * @name GeocodingService
+ * @param {$q} $q
+ * @param {PlatformService} PlatformService
+ * @param {LoggerService} Logger
+ * @param {MarkersService} MarkersService
+ * @returns {{reverseGeocode: Function, showPointLabel: Function}}
+ */
+function geocodingService($q, PlatformService, Logger, MarkersService) {
 
   function geocoder() {
     if (!geocoderInstance) {
@@ -15,11 +22,19 @@ function geocodingService($q, Config, PlatformService, Logger, MarkersService) {
   var
     geocoderInstance,
     geocodingServiceObject = {
+      /**
+       * @this GeocodingService
+       * @doc method
+       * @name reverseGeocode
+       * @description get location for given Point
+       * @param {Object} point
+       * @returns {Object}
+       */
       reverseGeocode: function reverseGeocode(point) {
         var deferred = $q.defer();
         geocoder().reverseGeocode(
           {
-            prox: point.lat + ',' + point.lng+',500',
+            prox: point.lat + ',' + point.lng + ',500',
             language: 'en-gb',
             mode: 'retrieveAddresses',
             maxresults: 1
@@ -38,6 +53,13 @@ function geocodingService($q, Config, PlatformService, Logger, MarkersService) {
 
         return deferred.promise;
       },
+      /**
+       * @this GeocodingService
+       * @doc method
+       * @name showPointLabel
+       * @description get location for given Point and renders it on the map
+       * @param {Object} point
+       */
       showPointLabel: function showPointLabel(point) {
         geocodingServiceObject.reverseGeocode(point).then(function success(location) {
           MarkersService.showPointLabel(location);

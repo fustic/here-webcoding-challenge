@@ -1,9 +1,20 @@
 'use strict';
-var utils = require('../../common').utils;
 placeInformationController.$inject = [
   'SearchService', '$rootScope', '$scope', 'MarkersService', 'UtilService', '$filter', 'Heremaps.Enums'
 ];
 
+/**
+ * @class
+ * @name PlaceInformationController
+ * @description controller for place info
+ * @param {SearchService} SearchService
+ * @param {$rootScope} $rootScope
+ * @param {$scope} $scope
+ * @param {MarkersService} MarkersService
+ * @param {UtilService} UtilService
+ * @param {$filter} $filter
+ * @param {HeremapsEnums} Enums
+ */
 function placeInformationController(SearchService, $rootScope, $scope, MarkersService, UtilService, $filter, Enums) {
   var
     placeID = $scope.placeId,

@@ -2,6 +2,9 @@
 
 var utils = {
   /**
+   * @doc method
+   * @name isEmptyObject
+   * @description checks if object is empty
    * @param {Object} obj
    * @return {boolean}
    */
@@ -24,9 +27,23 @@ var utils = {
       element = null;
     });
   },
+  /**
+   * @doc method
+   * @name isInt
+   * @description check if number is int
+   * @param {number} number
+   * @returns {boolean}
+   */
   isInt: function isInt(number) {
     return number % 1 === 0;
   },
+  /**
+   * @doc method
+   * @name addClassToElement
+   * @description add new css class to the given element
+   * @param {HTMLElement} element
+   * @param {string} className
+   */
   addClassToElement: function addClassToElement(element, className) {
     if (element) {
       if (element.classList) {
@@ -36,6 +53,13 @@ var utils = {
       }
     }
   },
+  /**
+   * @doc method
+   * @name removeClassFromElement
+   * @description remove css class from the given element
+   * @param {HTMLElement} element
+   * @param {string} className
+   */
   removeClassFromElement: function (element, className) {
     if (element) {
       if (element.classList) {
@@ -45,6 +69,13 @@ var utils = {
       }
     }
   },
+  /**
+   * @doc method
+   * @name parseMapParams
+   * @description parse map get parameter
+   * @param {string} mapParam
+   * @returns {MapParams}
+   */
   parseMapParams: function parseMapParams(mapParam) {
     if (!mapParam) {
       return null;
@@ -74,6 +105,13 @@ var utils = {
       searchMap = [].concat(latLngArray, map.getZoom(), mapType);
     return searchMap.join(',');
   },
+  /**
+   * @doc method
+   * @name secondsRoundTime
+   * @description rounds seconds to readable string, such as 4days 3hrs 5mins
+   * @param {number} seconds
+   * @returns {string}
+   */
   secondsRoundTime: function secondsRoundTime(seconds) {
     if (!seconds || !utils.isInt(seconds)) {
       return '';
@@ -94,6 +132,13 @@ var utils = {
     }
     return roundTime.join(', ');
   },
+  /**
+   * @doc method
+   * @name metersRoundDistance
+   * @description rounds meters to readable string, such as 4.2km
+   * @param {number} meters
+   * @returns {string}
+   */
   metersRoundDistance: function metersRoundDistance(meters) {
     if (!meters || !utils.isInt(meters)) {
       return '';

@@ -89,6 +89,12 @@ var logger = {
 
 loggerService.$inject = [];
 
+/**
+ * @class
+ * @name LoggerService
+ * @description wrapper on all logs which may include console, Rollbar, etc
+ * @returns {{log: Function, critical: Function, error: Function, info: Function, warn: Function, consolelog: Function}}
+ */
 function loggerService() {//Config
 
   isProduction = false; //Config.debug

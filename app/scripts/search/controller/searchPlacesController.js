@@ -4,7 +4,14 @@ var utils = require('../../common').utils;
 searchPlacesController.$inject = [
   'SearchService', '$location', 'MapService', 'Heremaps.Enums'
 ];
-
+/**
+ * @class
+ * @name SearchPlacesController
+ * @param {SearchService} SearchService
+ * @param {$location} $location
+ * @param {MapService} MapService
+ * @param {HeremapsEnums} Enums
+ */
 function searchPlacesController(SearchService, $location, MapService, Enums) {
 
   this.search = {
@@ -18,6 +25,7 @@ function searchPlacesController(SearchService, $location, MapService, Enums) {
     },
     selectedItemChange: function selectedItemChange(item) {
       SearchService.addSearchResultToRecent(item);
+      //update location path for new place
       $location.path('/places/' + (item.id || item.placeId) + '/').search({
         map: utils.getMapStringfromMap(item.position || item.location.position, MapService.getMap())
       });

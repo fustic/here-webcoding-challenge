@@ -2,11 +2,20 @@
 
 var
   H = require('H'),
-  utils = require('../../common').utils,
   angular = require('angular');
 
 markersService.$inject = ['Heremaps.Config', 'Heremaps.Enums', '$compile', '$rootScope'];
 
+/**
+ * @class
+ * @name MarkersService
+ * @description Render markers, points, label, routes
+ * @param {HeremapsConfig} Config
+ * @param {HeremapsEnums} Enums
+ * @param {$compile} $compile
+ * @param {$rootScope} $rootScope
+ * @returns {{setMap: Function, setUI: Function, addCurrentPositionMarker: Function, showPointLabel: Function, showPlaceBubble: Function, showRoute: Function}}
+ */
 function markersService(Config, Enums, $compile, $rootScope) {
   function closeRoute() {
     if (map) {
@@ -21,17 +30,21 @@ function markersService(Config, Enums, $compile, $rootScope) {
     }
   }
   var
+    //reference to map instance
     map,
+    //reference to ui instance
     ui,
     $pointLabelScope = $rootScope.$new(),
     $placeScope = $rootScope.$new(),
     $pointLabel = $compile(angular.element('<location-label></location-label>'))($pointLabelScope),
     $placeLabel = $compile(angular.element('<location-label></location-label>'))($placeScope),
+    //reference to point label opened bubble
     pointLabelBubble,
+    //reference to place label opened bubble
     placeLabelBubble,
     polyline,
     routeGroup,
-  // Hold a reference to any infobubble opened
+    // Hold a reference to any infobubble opened
     bubble;
 
   /**
@@ -56,19 +69,48 @@ function markersService(Config, Enums, $compile, $rootScope) {
   }
 
   return {
+    /**
+     * @this MarkersService
+     * @doc method
+     * @name setMap
+     * @description set a local instance of a map
+     * @param {Map} mapInstance
+     */
     setMap: function setMap(mapInstance) {
       map = mapInstance;
     },
+    /**
+     * @this MarkersService
+     * @doc method
+     * @name setUI
+     * @description set a local instance of a ui
+     * @param {Object} uiInstance
+     */
     setUI: function setUI(uiInstance) {
       ui = uiInstance;
     },
+    /**
+     * @this MarkersService
+     * @doc method
+     * @name addCurrentPositionMarker
+     * @description render a user current position marker
+     * @param {Location} coordinates
+     */
     addCurrentPositionMarker: function addCurrentPositionMarker(coordinates) {
       var
+        //TODO: move svg to service. It's ugly to hardcode them
         icon = new H.map.DomIcon('<svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24"><path fill="' + Config.map.colors.currentPosition + '" d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>'),
         marker = new H.map.DomMarker(coordinates, {icon: icon});
 
       map.addObject(marker);
     },
+    /**
+     * @this MarkersService
+     * @doc method
+     * @name showPointLabel
+     * @description render a point label to the map
+     * @param {Location} location
+     */
     showPointLabel: function showPointLabel(location) {
       if (bubble) {
         bubble.close();
@@ -95,6 +137,13 @@ function markersService(Config, Enums, $compile, $rootScope) {
         }
       }
     },
+    /**
+     * @this MarkersService
+     * @doc method
+     * @name showPlaceBubble
+     * @description render a place bubble to the map
+     * @param {Object} place
+     */
     showPlaceBubble: function showPlaceBubble(place) {
       if (pointLabelBubble) {
         pointLabelBubble.close();
@@ -124,6 +173,13 @@ function markersService(Config, Enums, $compile, $rootScope) {
         }
       }
     },
+    /**
+     * @this MarkersService
+     * @doc method
+     * @name showRoute
+     * @description render a route
+     * @param {Object} route
+     */
     showRoute: function showRoute(route) {
       closeRoute();
       var
@@ -147,6 +203,7 @@ function markersService(Config, Enums, $compile, $rootScope) {
       map.setViewBounds(polyline.getBounds(), true);
 
       var
+        //TODO: move svg to service. It's ugly to hardcode them
         svgMarkup = '<svg width="18" height="18" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="8" fill="#1b468d" stroke="white" stroke-width="1"  /></svg>',
         dotIcon = new H.map.Icon(svgMarkup, {anchor: {x:8, y:8}}),
         maneuver,
@@ -172,6 +229,7 @@ function markersService(Config, Enums, $compile, $rootScope) {
         }
       }
 
+      //TODO: move svg to service. It's ugly to hardcode them
       for (i = 0; i < route.waypoint.length; i += 1) {
         svgMarkup = '<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><circle fill="#fff" stroke="#bfbfbf" stroke-width="2.2" cx="29" cy="30" r="27.5"></circle></svg>';
         if (i === 0) {

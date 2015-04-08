@@ -1,21 +1,29 @@
 'use strict';
-var utils = require('../../common').utils;
 searchDirectionsController.$inject = [
   'WaypointFactory',
-  '$location',
   'Heremaps.Enums',
   'Heremaps.Config',
   'SearchService',
   'UserService',
-  'UtilService',
-  'MarkersService',
   '$stateParams',
   '$rootScope',
   '$scope'
 ];
-
-function searchDirectionsController(WaypointFactory, $location, Enums, Config, SearchService, UserService, UtilService,
-                                    MarkersService, $stateParams, $rootScope, $scope) {
+/**
+ * @class
+ * @name SearchDirectionsController
+ * @description controller to handle search for route
+ * @param {WaypointFactory} WaypointFactory
+ * @param {HeremapsEnums} Enums
+ * @param {HeremapsConfig} Config
+ * @param {SearchService} SearchService
+ * @param {UserService} UserService
+ * @param {$stateParams} $stateParams
+ * @param {$rootScope} $rootScope
+ * @param {$scope} $scope
+ */
+function searchDirectionsController(WaypointFactory, Enums, Config, SearchService, UserService, $stateParams,
+                                    $rootScope, $scope) {
 
   this.data = Config.directions;
   this.direction = {
@@ -23,7 +31,7 @@ function searchDirectionsController(WaypointFactory, $location, Enums, Config, S
     time: 0
   };
   this.sortOptions = {
-    handle: '.draggable',
+    handle: '.draggable',//element class for draggable list element item
     onSort: function onSort() {
       checkAndCalculateRoute();
     }
@@ -37,6 +45,7 @@ function searchDirectionsController(WaypointFactory, $location, Enums, Config, S
       var
         lastWaypoint = this.waypoints[this.waypoints.length - 1];
 
+      //if start waypoint is empty - use user current locatoin
       if (!this.waypoints[0].waypoint) {
         UserService.getAnyLocation().then(function success(location) {
           SearchService.search(location.lat + ',' + location.lng).then(function success(items) {
@@ -47,7 +56,7 @@ function searchDirectionsController(WaypointFactory, $location, Enums, Config, S
           }.bind(this));
         }.bind(this));
       }
-
+      //if number of waypoints is less than max - add this waypoint as final destination
       if (this.waypoints.length < this.data.maxWaypoints) {
         if (lastWaypoint.waypoint) {
           this.waypoints.push(new WaypointFactory(placeId, geo));
@@ -55,12 +64,14 @@ function searchDirectionsController(WaypointFactory, $location, Enums, Config, S
           this.waypoints[this.waypoints.length - 1] = new WaypointFactory(placeId, geo);
         }
       } else {
+        //otherwise - replace final destination
         lastWaypoint = null;
         this.waypoints[this.waypoints.length - 1] = new WaypointFactory(placeId, geo);
       }
     }.bind(this));
 
   this.mode = this.data.modes[0].value;
+  //get mode from get param
   while (modesLen--) {
     if (this.data.modes[modesLen].value === $stateParams.mode) {
       this.mode = $stateParams.mode;
@@ -69,6 +80,7 @@ function searchDirectionsController(WaypointFactory, $location, Enums, Config, S
   }
   this.waypoints = [];
 
+  //fill waypoints from get param
   route.forEach(function (r) {
     var
       params = r.split(':');
@@ -76,7 +88,7 @@ function searchDirectionsController(WaypointFactory, $location, Enums, Config, S
       this.waypoints.push(new WaypointFactory(params[0], params[1]));
     }
   }.bind(this));
-
+  //if number of waypoints less then minimum - fill them with empty waypoints
   for (i = this.waypoints.length; i < this.data.minWaypoints; ++i) {
     this.waypoints.push(new WaypointFactory());
   }
