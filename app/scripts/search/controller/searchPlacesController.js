@@ -1,21 +1,30 @@
 'use strict';
 var utils = require('../../common').utils;
 searchPlacesController.$inject = [
-  'SearchService', '$location', 'MapService'
+  'SearchService', '$location', 'MapService', 'Heremaps.Enums'
 ];
 
-function searchPlacesController(SearchService, $location, MapService) {
+function searchPlacesController(SearchService, $location, MapService, Enums) {
 
   this.search = {
-    searchText: '',
+    searchText: undefined,
     selectedItem: null,
-    querySearch: function querySearch(query) {
-      return SearchService.search(query);
+    querySearch: function querySearch(search) {
+      if (search.searchText === Enums.INVISIBLE_SYMBOLS.ZERO_WIDTH_NON_JOINER) {
+        return SearchService.recentSearch();
+      }
+      return SearchService.search(search.searchText.replace(Enums.INVISIBLE_SYMBOLS.ZERO_WIDTH_NON_JOINER, ''));
     },
     selectedItemChange: function selectedItemChange(item) {
-      $location.path('/places/' + item.id + '/').search({
-        map: utils.getMapStringfromMap(item.position, MapService.getMap())
+      SearchService.addSearchResultToRecent(item);
+      $location.path('/places/' + (item.id || item.placeId) + '/').search({
+        map: utils.getMapStringfromMap(item.position || item.location.position, MapService.getMap())
       });
+    },
+    clickHandler: function clickHandler(search) {
+      if (search.selectedItem === null && search.searchText === undefined) {
+        search.searchText = Enums.INVISIBLE_SYMBOLS.ZERO_WIDTH_NON_JOINER;
+      }
     }
   }
 }

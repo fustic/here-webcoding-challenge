@@ -1,7 +1,9 @@
 'use strict';
 waypointTitleFilter.$inject = ['$filter'];
 function waypointTitleFilter($filter) {
-  var vicinityFilter = $filter('vicinity');
+  var
+    placeAddressFilter = $filter('placeAddress'),
+    placeTitleFilter = $filter('placeTitle');
   /**
    * @doc method
    * @description replace item title and vicinity br with comma
@@ -9,7 +11,7 @@ function waypointTitleFilter($filter) {
    * @return {string}
    */
   return function (item) {
-    return item.title + ', ' + vicinityFilter(item.vicinity);
+    return placeTitleFilter(item) + ', ' + placeAddressFilter(item);
   };
 }
 

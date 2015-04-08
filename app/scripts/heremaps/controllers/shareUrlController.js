@@ -22,8 +22,9 @@ function shareUrlController($location, UserService, UtilService) {
         this.url = response.data.data.url;
         this.showTooltip = true;
         this.autoSelectOptions.end = this.url.length;
+      } else {
+        UtilService.showErrorMessage('Can not short url');
       }
-      console.log(response);
     }.bind(this), function error(err) {
       UtilService.showErrorMessage('Can not short url', err);
     });

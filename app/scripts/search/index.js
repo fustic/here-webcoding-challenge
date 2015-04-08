@@ -13,6 +13,8 @@ var
     .config(require('./router'))
     .filter('vicinity', require('./filters/vicinityFilter'))
     .filter('waypointTitle', require('./filters/waypointTitleFilter'))
+    .filter('placeAddress', require('./filters/placeAddressFilter'))
+    .filter('placeTitle', require('./filters/placeTitleFilter'))
     .controller('SearchController', require('./controller/searchController'))
     .controller('SearchPlacesController', require('./controller/searchPlacesController'))
     .controller('SearchDirectionsController', require('./controller/searchDirectionsController'))

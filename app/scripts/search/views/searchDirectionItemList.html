@@ -9,7 +9,8 @@
 </span>
 <md-button ng-if="$last && searchDirections.waypoints.length < searchDirections.data.maxWaypoints"
            ng-click="searchDirections.addWaypoint()"
-           class="md-fab md-raised add-waypoint-iternaty" aria-label="Add a waypoint">
+           class="md-fab md-raised add-waypoint-iternaty" aria-label="Add a waypoint"
+           tabindex="1000">
   <md-tooltip md-direction="right" md-autohide="true">Add a waypoint</md-tooltip>
   <i class="mdi mdi-plus"></i>
 </md-button>
@@ -18,12 +19,12 @@
   ng-class="{'last-item-element': $last, 'iternaty-item-bar': !$first}"
   md-delay="400"
   md-autofocus="true"
-  ng-click="waypoint.disabled = false;"
   md-selected-item="waypoint.selectedItem"
   md-search-text="waypoint.searchText"
   md-selected-item-change="waypoint.selectedItemChange(item)"
   md-items="item in waypoint.querySearch(waypoint.searchText)"
   md-item-text="item | waypointTitle"
+  ng-click="waypoint.clickHandler()"
   placeholder="{{searchDirections.getPlaceHolder($index)}}">
 
 
@@ -31,15 +32,16 @@
     <span class="dropdown_list_item_icon result_category">
       <img ng-src="{{item.icon}}"/>
     </span>
-    <span md-highlight-text="searchPlaces.search.searchText" md-highlight-flags="gi">{{item.title}}</span>
+    <span md-highlight-text="searchPlaces.search.searchText" md-highlight-flags="gi">{{item | placeTitle}}</span>
   </span>
   <span class="dropdown_list_item_description">
-    <span md-highlight-text="searchPlaces.search.searchText" md-highlight-flags="gi" ng-bind-template="{{item.vicinity | vicinity}}"></span>
+    <span md-highlight-text="searchPlaces.search.searchText" md-highlight-flags="gi" ng-bind-template="{{item | placeAddress}}"></span>
   </span>
 </md-autocomplete>
 <md-button ng-if="!$first && !$last"
            ng-click="searchDirections.removeWaypoint($index)"
-           class="md-fab md-raised remove-waypoint-iternaty" aria-label="Remove the waypoint">
+           class="md-fab md-raised remove-waypoint-iternaty" aria-label="Remove the waypoint"
+           tabindex="1000">
   <md-tooltip md-direction="left" md-autohide="true">Remove the waypoint</md-tooltip>
   <i class="mdi mdi-minus"></i>
 </md-button>

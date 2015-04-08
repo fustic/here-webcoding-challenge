@@ -126,7 +126,6 @@ function markersService(Config, Enums, $compile, $rootScope) {
     },
     showRoute: function showRoute(route) {
       closeRoute();
-      console.log(route);
       var
         strip = new H.geo.Strip(),
         routeShape = route.shape;

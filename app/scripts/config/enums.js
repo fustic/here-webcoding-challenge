@@ -30,5 +30,8 @@ module.exports = {
   },
   EVENTS: {
     ADD_DIRECTION: 'adddirection'
+  },
+  INVISIBLE_SYMBOLS: {
+    ZERO_WIDTH_NON_JOINER: '\u200C'
   }
 };

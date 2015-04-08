@@ -9,10 +9,11 @@ searchService.$inject = [
   'PlatformService',
   'MapService',
   'LoggerService',
-  '$http'
+  '$http',
+  'HeremapsCacheFactory'
 ];
 
-function searchService($q, PlatformService, MapService, Logger, $http) {
+function searchService($q, PlatformService, MapService, Logger, $http, CacheFactory) {
 
   function getPlacesService() {
     if (!placesService) {
@@ -27,6 +28,9 @@ function searchService($q, PlatformService, MapService, Logger, $http) {
     return router;
   }
   var
+    maxRecentSearches = 5,
+    /* jshint -W064 */
+    cache = CacheFactory('search'),
     placesService,
     router,
     searchServiceObject = {
@@ -80,6 +84,30 @@ function searchService($q, PlatformService, MapService, Logger, $http) {
           deferred.reject(err);
         });
         return deferred.promise;
+      },
+      recentSearch: function recentSearch(placeIDs) {
+        var
+          deferred = $q.defer(),
+          recent = (cache.get('recent') || []);
+        placeIDs = placeIDs || [];
+        if (placeIDs.length) {
+          recent = recent.filter(function (element) {
+            return placeIDs.indexOf(element.id) === -1;
+          });
+        }
+        deferred.resolve(recent.slice(0, maxRecentSearches));
+        return deferred.promise;
+      },
+      addSearchResultToRecent: function (place) {
+        var
+          recent = cache.get('recent') || [];
+        if (recent.filter(function (element) {
+            return element.id === place.id;
+          }).length) {
+          return;
+        }
+        recent.unshift(place);
+        cache.putValue('recent', recent);
       }
     };
 

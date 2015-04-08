@@ -5,8 +5,10 @@
   md-selected-item="searchPlaces.search.selectedItem"
   md-search-text="searchPlaces.search.searchText"
   md-selected-item-change="searchPlaces.search.selectedItemChange(item)"
-  md-items="item in searchPlaces.search.querySearch(searchPlaces.search.searchText)"
-  md-item-text="item.title"
+  md-items="item in searchPlaces.search.querySearch(searchPlaces.search)"
+  md-item-text="item | waypointTitle"
+  ng-click="searchPlaces.search.clickHandler(searchPlaces.search)"
+  md-min-length="0"
   placeholder="Let's give this engine a crank…">
 
 
@@ -14,9 +16,9 @@
     <span class="dropdown_list_item_icon result_category">
       <img ng-src="{{item.icon}}"/>
     </span>
-    <span md-highlight-text="searchPlaces.search.searchText" md-highlight-flags="gi">{{item.title}}</span>
+    <span md-highlight-text="searchPlaces.search.searchText" md-highlight-flags="gi">{{item | placeTitle}}</span>
   </span>
   <span class="dropdown_list_item_description">
-    <span md-highlight-text="searchPlaces.search.searchText" md-highlight-flags="gi" ng-bind-template="{{item.vicinity | vicinity}}"></span>
+    <span md-highlight-text="searchPlaces.search.searchText" md-highlight-flags="gi" ng-bind-template="{{item | placeAddress}}"></span>
   </span>
 </md-autocomplete>

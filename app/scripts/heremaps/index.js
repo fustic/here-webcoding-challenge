@@ -15,7 +15,8 @@ var
     'ngMaterial',
     'ngSanitize',
     'badwing.autoselect',
-    'ng-sortable'
+    'ng-sortable',
+    'angular-cache'
   ])
     .constant('Heremaps.Enums', require('../config/enums'))
     .constant('Heremaps.Config', appConfig)
@@ -30,11 +31,21 @@ var
       $mdThemingProvider.theme('success')
         .primaryPalette('green');
     }])
+    .config(['CacheFactoryProvider', function (CacheFactoryProvider) {
+      angular.extend(CacheFactoryProvider.defaults, {
+        maxAge: 604800000, // = 1000 * 60 * 60 * 24 * 7 (1 week)
+        storageMode: 'localStorage',
+        deleteOnExpire: 'aggressive',
+        storagePrefix: 'Heremaps.',
+        capacity: 200
+      });
+    }])
     .directive('hereMap', require('./directives/hereMap'))
     .directive('userCurrentLocation', require('./directives/userCurrentLocationDirective'))
     .directive('shareUrl', require('./directives/shareUrlDirective'))
     .controller('UserCurrentLocationController', require('./controllers/userCurrentLocationController'))
     .controller('ShareUrlController', require('./controllers/shareUrlController'))
+    .factory('HeremapsCacheFactory', require('./factories/cacheFactory'))
     .service('UtilService', require('./services/utilService'))
     .run(['LoggerService', function (LoggerService) {
       LoggerService.consolelog('the app started, ver.: ' + appConfig.version);

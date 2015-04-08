@@ -4,16 +4,20 @@ userService.$inject = [
   '$http',
   '$q',
   'Heremaps.Config',
-  '$location'
+  '$location',
+  'HeremapsCacheFactory',
+  'LoggerService'
 ];
 
 /**
  * @class UserService
  */
-function userService($http, $q, Config, $location) {
+function userService($http, $q, Config, $location, CacheFactory, Logger) {
   var
     defaultLocation = Config.location,
-    location,
+    /* jshint -W064 */
+    cache = CacheFactory('currentUser'),
+    location = cache.get('location'),
     userServiceObject = {
       getReverseIPLocation: function getReverseIPLocation() {
         return $http.get($location.protocol() + '://freegeoip.net/json/', {
@@ -44,6 +48,7 @@ function userService($http, $q, Config, $location) {
               lng: position.coords.longitude
             };
             deferred.resolve(location);
+            cache.putValue('location', location);
           }, function error() {
             deferred.resolve(defaultLocation);
             Logger.critical('Unable to retrieve your location');
