@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+var utils = {
   /**
    * @param {Object} obj
    * @return {boolean}
@@ -75,11 +75,14 @@ module.exports = {
     return searchMap.join(',');
   },
   secondsRoundTime: function secondsRoundTime(seconds) {
-    var
-      days = Math.floor(seconds / (3600 * 24)),
-      hrs = Math.floor((seconds - days * 3600 * 24) / 3600),
-      mins = Math.ceil((seconds - hrs * 3600) / 60),
-      roundTime = [];
+    if (!seconds || !utils.isInt(seconds)) {
+      return '';
+    }
+      var
+        days = Math.floor(seconds / (3600 * 24)),
+        hrs = Math.floor((seconds - days * 3600 * 24) / 3600),
+        mins = Math.ceil((seconds - hrs * 3600) / 60),
+        roundTime = [];
     if (days > 0) {
       roundTime.push(days + ' days');
     }
@@ -92,10 +95,14 @@ module.exports = {
     return roundTime.join(', ');
   },
   metersRoundDistance: function metersRoundDistance(meters) {
+    if (!meters || !utils.isInt(meters)) {
+      return '';
+    }
     var
-      kms = Math.floor(meters / 1000),
-      meters = Math.ceil((meters - kms * 1000) / 100);
+      kms = Math.floor(meters / 1000);
+    meters = Math.ceil((meters - kms * 1000) / 100);
 
     return kms + '.' + (meters + '')[0] + ' km';
   }
 };
+module.exports = utils;

@@ -1,5 +1,6 @@
 'use strict';
 var utils = require('../../common').utils;
+
 searchPlacesController.$inject = [
   'SearchService', '$location', 'MapService', 'Heremaps.Enums'
 ];

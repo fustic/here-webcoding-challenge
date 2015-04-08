@@ -38,6 +38,11 @@
     <span md-highlight-text="searchPlaces.search.searchText" md-highlight-flags="gi" ng-bind-template="{{item | placeAddress}}"></span>
   </span>
 </md-autocomplete>
+<md-button class="md-accent md-raised use-current-position"
+           ng-if="waypoint.isCurrentLocationAvailable()"
+           ng-click="waypoint.useCurrentPosition()">
+  Use current position
+</md-button>
 <md-button ng-if="!$first && !$last"
            ng-click="searchDirections.removeWaypoint($index)"
            class="md-fab md-raised remove-waypoint-iternaty" aria-label="Remove the waypoint"

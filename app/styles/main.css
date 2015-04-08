@@ -336,3 +336,9 @@ md-autocomplete.search-places, md-autocomplete.search-directions-autocomplete {
 .draggable {
   cursor: move;
 }
+.use-current-position {
+  position: absolute;
+  right: 30px;
+  top: 10px;
+  z-index: 99;
+}
