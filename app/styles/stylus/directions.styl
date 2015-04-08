@@ -1,0 +1,92 @@
+@import 'nib'
+@import 'variables'
+
+.search-directions
+  background-color rgb(250,250,250)
+
+.search-direction-reverse
+  &.md-button
+    &.md-fab
+      height 30px
+      width 30px
+      background-image url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NC40OTciIGhlaWdodD0iNjUuOTk3IiB2aWV3Qm94PSIwIDAgNjQuNDk3IDY1Ljk5NyI+PHBhdGggZmlsbD0iIzk4QTJBRSIgZD0iTTMzLjE0NCAzNy42MzRoLTR2MTFoLTdWMzcuNTgyaC0zLjk4Yy0uOTEgMC0xLjI4LS42NjItLjgyNy0xLjQ3Mmw3LjI3My0xMi43NDVjLjQ1NC0uODA4IDEuMTk3LS44MDggMS42NSAwbDcuMjc0IDEyLjc0NWMuNDUzLjgxLjUxNyAxLjUyNC0uMzkgMS41MjR6bS0uMzktMTIuNDc3bDcuMjcgMTIuNzQ3Yy40NTQuODA3IDEuMTk3LjgwNyAxLjY1NCAwbDcuMjcyLTEyLjc0N2MuNDUyLS44MS4wODItMS40Ny0uODI3LTEuNDdsLTMuOTgtLjA1NHYtMTFoLTd2MTFoLTRjLS45MDYgMC0uODQ1LjcxNS0uMzkgMS41MjR6Ii8+PC9zdmc+')
+      background-size 32px
+
+.search-directions-autocomplete
+  box-shadow none
+  width 100%
+  margin-left 10px
+  &.iternaty-item-bar
+    &:before
+      border-left 1px solid #bfbfbf
+      content ''
+      display block
+      height 50px
+      left -19px
+      position absolute
+      top -25px
+      z-index 1
+  input
+    padding: 0
+  md-autocomplete-wrap
+    button
+      display none
+
+
+.iternaty-item-icon
+  z-index 10
+
+
+.search-direction-item-list-border
+  &:after
+    content ''
+    position absolute
+    bottom 0
+    left 38px
+    width calc(100% - 38px)
+    border-bottom 1px solid rgba(135,135,135,0.32)
+
+.search-direction-item-list
+  padding 5px 0 5px 10px
+  position relative
+
+.add-waypoint-iternaty
+  &.md-button
+    &.md-fab
+      width 17px
+      height 17px
+      position absolute
+      left 11px
+      top -10px
+      padding 0
+      margin 0
+  i
+    font-size 16px
+    padding 0
+    margin-top -5px
+
+.remove-waypoint-iternaty
+  &.md-button
+    &.md-fab
+      width 25px
+      height 25px
+      position absolute
+      right 0
+      top 12px
+      padding 0
+      margin 0
+  i
+    padding 0
+    margin-top -4px
+    margin-left 1px
+
+.direction-info
+  height 225px
+  padding-left 15px
+
+.use-current-position
+  position absolute
+  right 30px
+  top 10px
+  z-index 99
+
