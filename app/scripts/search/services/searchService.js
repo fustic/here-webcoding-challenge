@@ -112,7 +112,7 @@ function searchService($q, PlatformService, MapService, Logger, $http, CacheFact
           if (route) {
             return deferred.resolve(route);
           }
-          return result.reject();
+          return deferred.reject();
         }, function error(err) {
           deferred.reject(err);
         });
