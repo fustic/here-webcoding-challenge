@@ -11,7 +11,8 @@ var
   source = require('vinyl-source-stream'),
   argv = require('yargs').argv,
   nib = require('nib'),
-  production = argv.staging || process.env.ENVIRONMENT === 'staging' ? false : true;
+  production = argv.staging || process.env.ENVIRONMENT === 'staging' ? false : true,
+  karma = require('karma').server;
 
 gulp.task('styles', function () {
   return gulp.src('app/styles/main.css')
@@ -215,4 +216,11 @@ gulp.task('build-styles', function () {
       use: [nib()]
     }))
     .pipe(gulp.dest('app/styles'));
+});
+
+gulp.task('test', function (done) {
+  karma.start({
+    configFile: __dirname + '/tests/karma.conf.js',
+    singleRun: true
+  }, done);
 });

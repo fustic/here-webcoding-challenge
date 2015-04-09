@@ -11,6 +11,7 @@ app/scripts/app.min.js
 app/scripts/vendor.min.js
 app/scripts/config/app.json
 app/styles/main.css
+tests/coverage
 **/.DS_Store
 **/*.log
 photorec.ses
